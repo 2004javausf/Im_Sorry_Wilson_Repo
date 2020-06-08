@@ -12,7 +12,11 @@ export class UsersService {
   user:Users = {
     uID: 0,
     username: "",
-    password: ""
+    password: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    pic: ""
   }
 
   constructor(private httpclient: HttpClient) { }

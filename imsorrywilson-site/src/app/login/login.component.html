@@ -1,13 +1,19 @@
-<Form ngForm #f="ngForm" autocomplete="off" (ngSubmit)="onSubmit(f)">
-    <h2>Log into Account</h2>
-    <div>
-    <input type="text" name="username" ngModel required #username="ngModel" placeholder="Username"/>
-    </div>
+<body>
+    <Form ngForm #f="ngForm" autocomplete="off" (ngSubmit)="onSubmit(f)">
+        <h2>Log into Account</h2>
+        <div id = info>
+        <input type="text" name="username" ngModel required #username="ngModel" placeholder="Username"/>
+        </div>
 
-    <div>
-        <input type="password" name="password" ngModel required #password="ngModel" placeholder="Password"/>
-    </div>
-    <div>
-        <input type="submit" [disabled]="!f.valid" value="Log in" />
-    </div>
-</Form>
+        <div id = info>
+            <input type="password" name="password" ngModel required #password="ngModel" placeholder="Password"/>
+        </div>
+        <div>
+            <input type="submit" [disabled]="!f.valid" value="Log in" />
+        </div>
+    </Form>
+    <nav>
+        <a routerLink="/register">Register</a>
+    </nav>
+</body>
+<router-outlet></router-outlet>
