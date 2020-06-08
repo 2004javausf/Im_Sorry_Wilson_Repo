@@ -1,13 +1,13 @@
-package com.example.demo;
+package com.wilson.driver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Project2WilsonApplication {
+public class Driver {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Project2WilsonApplication.class, args);
+		SpringApplication.run(Driver.class, args);
 	}
 
 }
