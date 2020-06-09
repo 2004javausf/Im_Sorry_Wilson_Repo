@@ -13,8 +13,8 @@ export class UsersService {
     uID: 0,
     username: "",
     password: "",
-    firstName: "",
-    lastName: "",
+    firstName: "Wilson",
+    lastName: "I'm Sorry",
     email: "",
     pic: ""
   }

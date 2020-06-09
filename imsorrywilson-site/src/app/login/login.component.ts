@@ -12,7 +12,7 @@ import { UsersService } from '../users.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private auth: AuthService, private router: Router, private employeeservice: UsersService) { }
+  constructor(private auth: AuthService, private router: Router, private userservice: UsersService) { }
 
   ngOnInit(): void {
   }
@@ -24,12 +24,13 @@ export class LoginComponent implements OnInit {
   onSubmit(f){
     this.login.username = f.value.username;
     this.login.password = f.value.password;
+    this.router.navigate(['user']);
     // this.auth.getUserDetails(this.login).subscribe(res=> {
     //   if (res.empID == 0){
     //     window.alert('Invalid credentials')
     //   } else{
     //     this.router.navigate(['user']);
-    //     this.employeeservice.setIndividualUser(res);
+    //     this.userservice.setIndividualUser(res);
     //   }
     // });
   }
