@@ -1,4 +1,4 @@
-package com.wilson.beans;
+package com.wilson.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +9,6 @@ import javax.persistence.Table;
 import org.springframework.data.annotation.Id;
 import org.springframework.stereotype.Component;
 
-@Component
 @Entity
 @Table(name="USERS")
 public class User {

@@ -1,4 +1,4 @@
-package com.wilson.beans;
+package com.wilson.model;
 
 import java.sql.Date;
 
