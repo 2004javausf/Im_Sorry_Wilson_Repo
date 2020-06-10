@@ -1,0 +1,14 @@
+body{
+    text-align: center;
+}
+textarea{
+    resize: none;
+}
+#sure{
+    background-color: aqua;
+}
+#what{
+    display: inline-flex;
+    vertical-align: middle;
+    float:right;
+}
