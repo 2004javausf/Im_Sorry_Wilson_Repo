@@ -32,14 +32,14 @@ public class User {
 	private String email;
 	
 	@Column(name = "PIC")
-	private String pic;
+	private byte[] pic;
 
 	public User() {
 		super();
 	}
 
 	public User(Integer id, String username, String password, String firstName, String lastName, String email,
-			String pic) {
+			byte[] pic) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -56,7 +56,7 @@ public class User {
 		this.password = password;
 	}
 
-	public User(String username, String password, String firstName, String lastName, String email, String pic) {
+	public User(String username, String password, String firstName, String lastName, String email, byte[] pic) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -114,11 +114,11 @@ public class User {
 		this.email = email;
 	}
 
-	public String getPic() {
+	public byte[] getPic() {
 		return pic;
 	}
 
-	public void setPic(String pic) {
+	public void setPic(byte[] pic) {
 		this.pic = pic;
 	}
 
