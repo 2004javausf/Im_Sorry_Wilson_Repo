@@ -119,12 +119,23 @@
               "devServerTarget": "imsorrywilson-site:serve:production"
             }
           }
-        }
+        },
+        "deploy": {
+          "builder": "@jefiozie/ngx-aws-deploy:deploy",
+          "options": {
+          "region": "us-east-2",
+          "bucket": "imsorrywilson",
+          "secretAccessKey": "ZgK50VMBzc2rIG9isHELbM9XT1QHXwCzxioyvrqs",
+          "accessKeyId": "AKIATRPKGQ4Z2RSK2A4U"
+          }
+      }
       }
     }
+
   },
   "defaultProject": "imsorrywilson-site",
   "cli": {
     "analytics": "571aab83-3433-40fb-8634-002d730b7078"
   }
 }
+
