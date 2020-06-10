@@ -24,14 +24,14 @@ export class LoginComponent implements OnInit {
   onSubmit(f){
     this.login.username = f.value.username;
     this.login.password = f.value.password;
-    this.router.navigate(['user']);
-    // this.auth.getUserDetails(this.login).subscribe(res=> {
-    //   if (res.empID == 0){
-    //     window.alert('Invalid credentials')
-    //   } else{
-    //     this.router.navigate(['user']);
-    //     this.userservice.setIndividualUser(res);
-    //   }
-    // });
+    this.auth.getUserDetails(this.login).subscribe(res=> {
+      console.log(res);
+      if (res.id == null){
+        window.alert('Invalid credentials')
+      } else{
+        this.router.navigate(['user']);
+        this.userservice.setIndividualUser(res);
+      }
+    });
   }
 }

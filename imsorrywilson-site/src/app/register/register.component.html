@@ -20,10 +20,11 @@
     </div>
         
     <div>
-        <input type="text" name="pic" ngModel required #pic="ngModel" placeholder="Profile Picture"/>
+        <input type="text" name="pic" ngModel  #pic="ngModel" placeholder="Profile Picture"  /> <!--required--> 
     </div>
     <div>
-        <input type="submit" [disabled]="!r.valid" value="Register" />
-    </div>
+        <input type="submit" [disabled]="!r.valid" value="Register"/>  
+        
+    </div> 
 </div>
 </Form>
