@@ -13,13 +13,13 @@ export class RegisterComponent implements OnInit {
   constructor(private router: Router, private register: RegisterService) { }
 
   user:Users = {
-    uID: 0,
+    id: 0,
     username: "",
     password: "",
     firstName: "",
     lastName: "",
     email: "",
-    pic: ""
+    pic: null
   }
   ngOnInit(): void {
   }
@@ -31,9 +31,9 @@ export class RegisterComponent implements OnInit {
     this.user.firstName = r.value.firstName;
     this.user.lastName = r.value.lastName;
     this.user.email = r.value.email;
-    this.user.pic = r.value.pic;
+    // this.user.pic = r.value.pic;
     console.log(this.user);
-    this.register.registerUser(this.user);
+    this.register.registerUser(this.user).subscribe();
     window.alert("Account Registered!");
     this.router.navigate(['login']);
   }

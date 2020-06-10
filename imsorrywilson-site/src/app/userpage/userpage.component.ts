@@ -14,13 +14,13 @@ export class UserpageComponent implements OnInit {
   constructor(private router: Router, private userservice: UsersService) { }
 
   user:Users = {
-    uID: 0,
+    id: 0,
     username: "",
     password: "",
     firstName: "",
     lastName: "",
     email: "",
-    pic: ""
+    pic: null
   }
   
   ngOnInit(): void {
@@ -31,5 +31,9 @@ export class UserpageComponent implements OnInit {
   updateCountdown(){
     console.log(this.current)
     this.charactersRemaining = (189 - this.current.length).toString();
+  }
+
+  logout(){
+    this.router.navigate(['login']);
   }
 }

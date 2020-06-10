@@ -12,6 +12,7 @@ export class RegisterService {
 
   registerUser(user:Users): Observable<any>{
     console.log(user);
-    return this.http.post<any>('http://localhost:8080/Real_TRMS_Project/login',JSON.stringify(user)); //change the url
+    return this.http.post<any>('http://localhost:8080/user/register',user); 
   }
+
 }

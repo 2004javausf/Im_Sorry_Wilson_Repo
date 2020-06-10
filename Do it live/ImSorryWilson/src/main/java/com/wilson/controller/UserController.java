@@ -5,24 +5,27 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.wilson.entity.Login;
 import com.wilson.entity.User;
 import com.wilson.service.UserService;
 
 @RestController
 @RequestMapping("/user")
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 	@Autowired
 	UserService userService;
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody()
-	public User getUserAuthenticate(@RequestBody User user){
+	public User getUserAuthenticate(@RequestBody Login user){
 		List<User> temp = new ArrayList<User>();
 		User ret = new User();
 		temp = this.userService.getAllUsers();
@@ -73,6 +76,7 @@ public class UserController {
 	@RequestMapping(value= "/register", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody()
 	public User addNewUser(@RequestBody User user) {
+		System.out.println("no");
 		return this.userService.addUser(user);
 	}
 }

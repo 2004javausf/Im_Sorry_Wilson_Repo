@@ -10,13 +10,13 @@ import { Observable } from 'rxjs';
 
 export class UsersService {
   user:Users = {
-    uID: 0,
+    id: 0,
     username: "",
     password: "",
     firstName: "Wilson",
     lastName: "I'm Sorry",
     email: "",
-    pic: ""
+    pic: null
   }
 
   constructor(private httpclient: HttpClient) { }

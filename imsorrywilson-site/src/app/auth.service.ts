@@ -11,7 +11,8 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   getUserDetails(login:Login): Observable<any>{
-    
-    return this.http.post<any>('http://localhost:8080/Real_TRMS_Project/login',JSON.stringify(login)); //change the url
+    console.log(JSON.stringify(login));
+
+    return this.http.post<any>('http://localhost:8080/user/login',login); //change the url
   }
 }
