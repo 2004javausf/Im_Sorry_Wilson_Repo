@@ -12,7 +12,6 @@ export class RegisterService {
 
   registerUser(user:Users): Observable<any>{
     console.log(user);
-    return this.http.post<any>('http://localhost:8080/user/register',user); 
+    return this.http.post<any>('http://localhost:8080/user/register',user);
   }
-
 }

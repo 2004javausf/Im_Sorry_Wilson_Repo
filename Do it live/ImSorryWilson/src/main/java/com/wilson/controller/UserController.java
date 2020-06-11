@@ -76,7 +76,6 @@ public class UserController {
 	@RequestMapping(value= "/register", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody()
 	public User addNewUser(@RequestBody User user) {
-		System.out.println("no");
 		return this.userService.addUser(user);
 	}
 }
