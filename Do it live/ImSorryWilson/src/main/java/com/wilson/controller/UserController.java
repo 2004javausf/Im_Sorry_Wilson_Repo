@@ -41,7 +41,7 @@ public class UserController {
 		return ret; //Returns json with null values if does not exist, filled json if it does.
 	}
 	
-	@RequestMapping(value = "/findbyusername", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/findbyusername", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody()
 	public User getUserByUsername(@RequestBody User user){
 		List<User> temp = new ArrayList<User>();
@@ -57,7 +57,7 @@ public class UserController {
 		return ret; //Returns json with null values if does not exist, filled json if it does.
 	}
 	
-	@RequestMapping(value = "/findbyid", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/findbyid", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody()
 	public User getUserById(@RequestBody User user){
 		List<User> temp = new ArrayList<User>();
@@ -76,7 +76,6 @@ public class UserController {
 	@RequestMapping(value= "/register", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody()
 	public User addNewUser(@RequestBody User user) {
-		System.out.println("no");
 		return this.userService.addUser(user);
 	}
 }
