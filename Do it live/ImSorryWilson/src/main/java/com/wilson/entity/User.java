@@ -38,6 +38,7 @@ public class User {
 		super();
 	}
 
+	
 	public User(Integer id, String username, String password, String firstName, String lastName, String email,
 			byte[] pic) {
 		super();
@@ -50,11 +51,6 @@ public class User {
 		this.pic = pic;
 	}
 
-	public User(String username, String password) {
-		super();
-		this.username = username;
-		this.password = password;
-	}
 
 	public User(String username, String password, String firstName, String lastName, String email, byte[] pic) {
 		super();
@@ -65,13 +61,18 @@ public class User {
 		this.email = email;
 		this.pic = pic;
 	}
+	
+	public User(String username, String password, String firstName, String lastName, String email) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+	}
 
 	public Integer getId() {
 		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getUsername() {
@@ -121,6 +122,8 @@ public class User {
 	public void setPic(byte[] pic) {
 		this.pic = pic;
 	}
+	
+	
 
 	@Override
 	public String toString() {
