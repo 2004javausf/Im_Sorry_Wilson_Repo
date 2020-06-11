@@ -24,6 +24,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -88,6 +89,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -129,6 +131,11 @@
       }
       }
     }
-},
-  "defaultProject": "imsorrywilson-site"
+
+  },
+  "defaultProject": "imsorrywilson-site",
+  "cli": {
+    "analytics": "571aab83-3433-40fb-8634-002d730b7078"
+  }
 }
+

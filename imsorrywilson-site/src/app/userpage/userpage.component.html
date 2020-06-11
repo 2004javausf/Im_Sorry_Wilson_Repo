@@ -1,0 +1,31 @@
+<body> 
+    <div id = sure>
+        <div>
+            <div style="text-align: left;">Welcome To I'm Sorry Wilson</div>
+            <input type = "text" placeholder="Search for other users">
+            <mat-menu #appMenu="matMenu">
+            <button mat-menu-item>Settings</button>
+            <button mat-menu-item>Help</button>
+            <button mat-menu-item (click) = "logout()">Log Out</button>
+            </mat-menu>
+
+            <button id = what>
+                {{user.firstName}}
+            </button>
+
+            <button id = what>
+                Home
+            </button>
+
+            <button mat-icon-button [matMenuTriggerFor]="appMenu" id = what>
+                <mat-icon>more_vert</mat-icon>
+            </button>
+        </div>
+    </div>
+    <div>
+        <div>Create a post!
+        </div>
+        <textarea [(ngModel)] = "current" (keypress) = "updateCountdown()" class = "message" placeholder="Enter your shit here" rows = "10" cols = "50" maxlength = "190"></textarea>
+        <span>Characters remaining: {{ charactersRemaining }}</span>
+    </div>
+</body>
