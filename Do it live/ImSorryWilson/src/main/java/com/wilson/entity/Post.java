@@ -42,6 +42,18 @@ public class Post {
 		this.likeCount = likeCount;
 		this.postDate = postDate;
 }
+	
+	
+	public Post(int iD, int userID, String post, byte[] pic, int likeCount, Date postDate) {
+		super();
+		ID = iD;
+		this.userID = userID;
+		this.post = post;
+		this.pic = pic;
+		this.likeCount = likeCount;
+		this.postDate = postDate;
+	}
+
 //----------------------------------------------------------
 
 //---------------------GETTERS & SETTERS--------------------
