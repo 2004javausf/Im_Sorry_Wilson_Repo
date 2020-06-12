@@ -46,13 +46,15 @@ public class UserController {
 		return ret; //Returns json with null values if does not exist, filled json if it does.
 	}
 	
-	@RequestMapping(value = "/findbyusername", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+
+	@RequestMapping(value = "/findbyusername", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody()
     public User getUserByUsername(@RequestParam String username){
         System.out.println(username);
         System.out.println(userService.getUserByUsername(username));
         return userService.getUserByUsername(username);
     }
+
 	
 	@RequestMapping(value = "/findbyid", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody()
