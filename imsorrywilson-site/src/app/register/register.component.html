@@ -1,5 +1,6 @@
+<body>
 <Form ngForm #r="ngForm" autocomplete="off" (ngSubmit)="onSubmit(r)">
-    <h2>Register For Your Account</h2>
+    <h2>Register a New Account</h2>
 <div class = .login>
     <div>
     <input type="text" name="username" ngModel required #username="ngModel" placeholder="Username"/>
@@ -19,13 +20,20 @@
         <input type="text" name="email" ngModel required #email="ngModel" placeholder="Email"/>
     </div>
         
-    <div><br>
-        <label for="pic" style="position:absolute;">Upload Profile Pic</label>
-        <input type="file" id = "pic" name="pic" ngModel  #pic="ngModel" accept = "image/*" (change)="fileChange($event)"/>
-    </div>
     <div>
-        <input type="submit" [disabled]="!r.valid" value="Register"/>  
-        
+        <input id="registration" type="submit" [disabled]="!r.valid" value="Register"/>  
     </div> 
 </div>
 </Form>
+
+<!--Separate the image submission due to JSON parsing/conversion issues-->
+    <Form>
+        <div><br>
+            <label for="pic" style="position:absolute;">(Optional) Upload Profile Pic</label>
+            <input type="file" id = "pic" name="pic" ngModel  #pic="ngModel" accept = "image/*" (change)="fileChange($event)"/>
+        </div>
+        <div>
+            <input type="submit" [disabled]="!r.valid" value="Upload Image" (click)="onUpload(r)"/>  
+        </div> 
+    </Form>
+</body>
