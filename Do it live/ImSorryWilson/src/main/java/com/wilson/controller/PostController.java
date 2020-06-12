@@ -31,7 +31,7 @@ public class PostController {
 		@RequestMapping(value = "/feed", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 		@ResponseBody()
 		public List<Post> getAllPosts(){
-			return(this.postService.getAllPosts()); //Returns json with null values if does not exist, filled json if it does.
+			return(this.postService.getAllPosts()); 
 		}
 		
 		@RequestMapping(value = "/profile", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

@@ -4,6 +4,7 @@ import { UsersService } from '../users.service';
 import { Users } from '../Users';
 import { Posts } from '../Posts';
 import { PostsService } from '../posts.service';
+import { DataSend } from '../data';
 
 
 @Component({
@@ -63,7 +64,6 @@ export class UserpageComponent implements OnInit {
   }
   settings(){
     this.home = 1;
-    console.log(this.home)
   }
   
   searchUName:"";
@@ -92,6 +92,20 @@ export class UserpageComponent implements OnInit {
     this.postservice.newPost(this.post).subscribe();
   }
 
+  data:DataSend={
+    firstName: this.user.firstName,
+    lastName:this.user.lastName,
+    email:this.user.email,
+    username:this.user.username
+  }
+    
+  
+  updateInfo(){
+    this.data.firstName = this.user.firstName;
+    this.data.lastName = this.user.lastName;
+    this.data.email = this.user.email;
+    console.log(this.data);
+  }
   logout(){
     this.router.navigate(['login']);
   }
