@@ -45,4 +45,16 @@ public class PostController {
 		public Post addNewPost(@RequestBody Post post) {
 			return this.postService.addPost(post);
 		}
+		
+		@RequestMapping(value= "/addlike", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+		@ResponseBody()
+		public int addLikeCount(@RequestParam int postID) {
+			return this.postService.addLikeCount(postID);
+		}
+		
+		@RequestMapping(value= "/sublike", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+		@ResponseBody()
+		public int subtractLikeCount(@RequestParam int postID) {
+			return this.postService.subtractLikeCount(postID);
+		}
 }
