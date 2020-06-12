@@ -30,20 +30,8 @@ public class UserController {
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody()
-	public User getUserAuthenticate(@RequestBody Login user){
-		List<User> temp = new ArrayList<User>();
-		User ret = new User();
-		temp = this.userService.getAllUsers();
-		for(int i=0; i<temp.size(); i++) {
-			if(temp.get(i).getUsername().equalsIgnoreCase(user.getUsername())) { //if username matches
-				if(temp.get(i).getPassword().equals(user.getPassword())) {//if password matches
-					ret = temp.get(i);
-				}
-				i=temp.size(); //either way, we're done here.
-			}
-		}
-		
-		return ret; //Returns json with null values if does not exist, filled json if it does.
+	public User getUserAuthenticate(@RequestParam String username, @RequestParam String password){
+		return userService.login(username, password);
 	}
 	
 	@RequestMapping(value = "/findbyusername", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -74,5 +62,17 @@ public class UserController {
 	@ResponseBody()
 	public User addNewUser(@RequestBody User user) {
 		return this.userService.addUser(user);
+	}
+	
+	@RequestMapping(value= "/updatepassword", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody()
+	public int updatePassword(@RequestParam String newPassword, @RequestParam int userID) {
+		return this.userService.updatePassword(newPassword, userID);
+	}
+	
+	@RequestMapping(value= "/updateinfo", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody()
+	public int updateInformation(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String username) {
+		return this.userService.updateInformation(firstName, lastName, email, username);
 	}
 }

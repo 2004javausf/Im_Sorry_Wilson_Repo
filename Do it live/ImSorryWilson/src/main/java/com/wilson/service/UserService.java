@@ -11,9 +11,14 @@ import com.wilson.entity.User;
 @Service
 public class UserService {
 	private UserDao userDao;
+	
 	@Autowired
 	UserService(UserDao userDao){
 		this.userDao = userDao;
+	}
+	
+	public User login(String username, String password) {
+		return this.userDao.login(username, password);
 	}
 	
 	public List<User> getAllUsers() {
@@ -27,5 +32,13 @@ public class UserService {
 	public User getUserByUsername(String username) {
         return this.userDao.findUserByUsername(username);
     }
+	
+	public int updatePassword(String newPassword, int userID) {
+		return this.userDao.updatePassword(newPassword, userID);
+	}
+	
+	public int updateInformation(String firstName, String lastName, String email, String username) {
+		return this.userDao.updateInformation(firstName, lastName, email, username);
+	}
 
 }
