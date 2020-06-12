@@ -17,5 +17,9 @@ public class PostService {
 	public List<Post> getAllPosts() {
 		return this.postDao.findAll();
 	}
+	
+	public Post addPost(Post post) {
+		return this.postDao.save(post);
+	}
 
 }

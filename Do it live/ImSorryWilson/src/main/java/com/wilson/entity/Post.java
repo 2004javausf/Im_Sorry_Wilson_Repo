@@ -35,8 +35,9 @@ public class Post {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Post(int userID, String post, int likeCount, Date postDate) {
+	public Post(int ID, int userID, String post, int likeCount, Date postDate) {
 		super();
+		this.ID = ID;
 		this.userID = userID;
 		this.post = post;
 		this.likeCount = likeCount;
@@ -44,9 +45,9 @@ public class Post {
 }
 	
 	
-	public Post(int iD, int userID, String post, byte[] pic, int likeCount, Date postDate) {
+	public Post(int ID, int userID, String post, byte[] pic, int likeCount, Date postDate) {
 		super();
-		ID = iD;
+		this.ID = ID;
 		this.userID = userID;
 		this.post = post;
 		this.pic = pic;

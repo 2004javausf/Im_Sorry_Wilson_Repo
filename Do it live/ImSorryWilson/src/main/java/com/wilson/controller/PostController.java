@@ -20,8 +20,12 @@ import com.wilson.service.PostService;
 @RequestMapping("/home")
 @CrossOrigin(origins = "http://localhost:4200")
 public class PostController {
-		@Autowired
+	
 		PostService postService;
+		@Autowired
+		PostController(PostService postService){
+			this.postService = postService;
+		}
 		
 		@RequestMapping(value = "/feed", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 		@ResponseBody()
@@ -32,7 +36,6 @@ public class PostController {
 		@RequestMapping(value = "/profile", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 		@ResponseBody()
 		public List<Post> getAllPostsByID(@RequestBody User id){
-			System.out.println("no");
 			List<Post> temp = new ArrayList<Post>();
 			List<Post> results = new ArrayList<Post>();
 			temp = this.postService.getAllPosts();
@@ -42,5 +45,11 @@ public class PostController {
 				}
 			}
 			return results; //Returns json with null values if does not exist, filled json if it does.
+		}
+		
+		@RequestMapping(value= "/newpost", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+		@ResponseBody()
+		public Post addNewPost(@RequestBody Post post) {
+			return this.postService.addPost(post);
 		}
 }
