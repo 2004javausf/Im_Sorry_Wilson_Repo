@@ -1,5 +1,6 @@
 package com.wilson.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,8 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.wilson.dao.PostDao;
 import com.wilson.entity.Post;
-//import com.wilson.entity.User;
-import com.wilson.entity.User;
 
 @Service
 public class PostService {
@@ -23,6 +22,8 @@ public class PostService {
 	}
 	
 	public Post addPost(Post post) {
+		Date d = new Date(System.currentTimeMillis());
+		post.setPostDate(d);
 		return this.postDao.save(post);
 	}
 	

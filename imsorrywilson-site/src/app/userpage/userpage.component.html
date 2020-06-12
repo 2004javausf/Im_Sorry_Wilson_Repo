@@ -37,7 +37,12 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
     
   <div><br><br><br><br><br>lets see</div>
 </div>
-<div *ngSwitchCase = "2"><br><br><br><br><br>{{searchedUser.username}}</div>
+<div *ngSwitchCase = "2">
+<br><br><br><br><br>{{searchedUser.username}}
+<div *ngFor = "let post of posts">
+  {{post.post}}
+</div>
+</div>
 <div *ngSwitchCase="0">
 
 
@@ -139,9 +144,13 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
         <div class="w3-col m12">
           <div class="w3-card w3-round w3-white">
             <div class="w3-container w3-padding">
-              <h6 class="w3-opacity">What are you feeling?</h6>
-              <p contenteditable="true" class="w3-border w3-padding" placeholder="What are you feeling?"></p>
-              <button type="button" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Post</button> 
+              <form>
+                <h6 class="w3-opacity">What would you like to post?</h6>
+                <textarea [(ngModel)] = "current" name = "current" (keypress) = "updateCountdown()" class = "message" placeholder="Hello, child." rows = "5" cols = "70" maxlength = "200"></textarea>
+                <h6>Characters remaining: {{ charactersRemaining }}</h6>
+                <input type="file" id = "postPic" name="postPic" ngModel  #postPic="ngModel" accept = "image/*" (change)="fileChange($event)"/><br>
+                <button type="button" (click) = "postIt()" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Post</button> 
+              </form>
             </div>
           </div>
         </div>
