@@ -21,7 +21,7 @@ import com.wilson.service.UserService;
 @RequestMapping("/user")
 @CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
-	UserService userService;
+	private UserService userService;
 	@Autowired
 	UserController(UserService userService){
 		this.userService = userService;
@@ -34,7 +34,7 @@ public class UserController {
 		User ret = new User();
 		temp = this.userService.getAllUsers();
 		for(int i=0; i<temp.size(); i++) {
-			if(temp.get(i).getUsername().equals(user.getUsername())) { //if username matches
+			if(temp.get(i).getUsername().equalsIgnoreCase(user.getUsername())) { //if username matches
 				if(temp.get(i).getPassword().equals(user.getPassword())) {//if password matches
 					ret = temp.get(i);
 				}
@@ -44,22 +44,6 @@ public class UserController {
 		
 		return ret; //Returns json with null values if does not exist, filled json if it does.
 	}
-	
-//	@RequestMapping(value = "/findbyusername", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-//	@ResponseBody()
-//	public User getUserByUsername(@RequestBody User user){
-//		List<User> temp = new ArrayList<User>();
-//		User ret = new User();
-//		temp = this.userService.getAllUsers();
-//		for(int i=0; i<temp.size(); i++) {
-//			if(temp.get(i).getUsername().equals(user.getUsername())) { //if username matches
-//				ret = temp.get(i);
-//				i=temp.size(); //we're done here
-//			}
-//		}
-//		
-//		return ret; //Returns json with null values if does not exist, filled json if it does.
-//	}
 	
 	@RequestMapping(value = "/findbyusername", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody()
