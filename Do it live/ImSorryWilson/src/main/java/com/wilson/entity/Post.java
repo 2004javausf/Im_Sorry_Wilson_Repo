@@ -21,7 +21,7 @@ public class Post {
 	private int userID;
 	@Column(name="POST")
 	private String post;
-	@Column(name="PIC")
+	@Column(name="PIC", columnDefinition = "BLOB")
 	private byte[] pic = null;
 	@Column(name="LIKE_COUNT")
 	private int likeCount;
@@ -34,7 +34,7 @@ public class Post {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-		
+
 	public Post(int ID, int userID, String post, byte[] pic, int likeCount, Date postDate) {
 		super();
 		this.ID = ID;
@@ -84,6 +84,7 @@ public class Post {
 		this.postDate = postDate;
 	}
 
+
 	public byte[] getPic() {
 		return pic;
 	}
@@ -91,8 +92,6 @@ public class Post {
 	public void setPic(byte[] pic) {
 		this.pic = pic;
 	}
-	
-	//----------------------------------------------------------
 
 
 	//------------------------TO-STRING-------------------------
