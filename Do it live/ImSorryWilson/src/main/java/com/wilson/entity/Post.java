@@ -83,10 +83,9 @@ public class Post {
 	public void setPostDate(Date postDate) {
 		this.postDate = postDate;
 	}
-	
-//----------------------------------------------------------
 
-public byte[] getPic() {
+
+	public byte[] getPic() {
 		return pic;
 	}
 
@@ -94,9 +93,6 @@ public byte[] getPic() {
 		this.pic = pic;
 	}
 
-	public void setID(int iD) {
-		ID = iD;
-	}
 
 	//------------------------TO-STRING-------------------------
 	@Override

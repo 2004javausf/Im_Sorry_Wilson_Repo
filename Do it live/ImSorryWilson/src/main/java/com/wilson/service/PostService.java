@@ -30,5 +30,13 @@ public class PostService {
 	public List <Post> getPostByUserID(int userID) {
         return this.postDao.findPostByUserID(userID);
     } 
+	
+	public int addLikeCount(int postID) {
+		return this.postDao.addLikeCount(postID);
+	}
+	
+	public int subtractLikeCount(int postID) {
+		return this.postDao.subtractLikeCount(postID);
+	}
 
 }
