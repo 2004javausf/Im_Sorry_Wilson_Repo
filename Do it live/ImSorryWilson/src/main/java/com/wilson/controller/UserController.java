@@ -14,14 +14,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.wilson.entity.Login;
 import com.wilson.entity.User;
+import com.wilson.service.PostService;
 import com.wilson.service.UserService;
 
 @RestController
 @RequestMapping("/user")
 @CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
-	@Autowired
 	UserService userService;
+	@Autowired
+	UserController(UserService userService){
+		this.userService = userService;
+	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody()
@@ -41,7 +45,7 @@ public class UserController {
 		return ret; //Returns json with null values if does not exist, filled json if it does.
 	}
 	
-	@RequestMapping(value = "/findbyusername", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/findbyusername", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody()
 	public User getUserByUsername(@RequestBody User user){
 		List<User> temp = new ArrayList<User>();
