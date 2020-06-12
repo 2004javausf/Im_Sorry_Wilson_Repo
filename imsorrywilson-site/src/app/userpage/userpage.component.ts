@@ -24,6 +24,16 @@ export class UserpageComponent implements OnInit {
     pic: null
   }
 
+  searchedUser:Users = {
+    id: 0,
+    username: "",
+    password: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    pic: null
+  }
+
   home:number = 0; //0 for user page, 1 for settings page, 2 for search //3 for user profile page
 
   post:Posts={
@@ -46,12 +56,20 @@ export class UserpageComponent implements OnInit {
 
   homie(){
     this.home = 0;
+    console.log("what")
   }
   settings(){
     this.home = 1;
+    console.log(this.home)
   }
-  search(){
+  
+  searchUName:"";
+  search(f){
     this.home = 2;
+    this.userservice.searchForUser(f.value).subscribe(res => this.searchedUser = res);
+  }
+  profile(){
+    this.home = 3;
   }
   logout(){
     this.router.navigate(['login']);
