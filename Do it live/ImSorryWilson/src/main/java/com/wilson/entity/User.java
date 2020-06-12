@@ -31,7 +31,7 @@ public class User {
 	@Column(name = "EMAIL")
 	private String email;
 	
-	@Column(name = "PIC", columnDefinition = "BLOB")
+	@Column(name = "PIC")
 	private byte[] pic;
 
 	public User() {
