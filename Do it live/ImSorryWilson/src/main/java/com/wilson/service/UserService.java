@@ -10,8 +10,11 @@ import com.wilson.entity.User;
 
 @Service
 public class UserService {
+	private UserDao userDao;
 	@Autowired
-	UserDao userDao;
+	UserService(UserDao userDao){
+		this.userDao = userDao;
+	}
 	
 	public List<User> getAllUsers() {
 		return this.userDao.findAll();
@@ -22,7 +25,7 @@ public class UserService {
 	}
 	
 	public User getUserByUsername(String username) {
-		return this.userDao.findUserByUsername(username);
-	}
+        return this.userDao.findUserByUsername(username);
+    }
 
 }
