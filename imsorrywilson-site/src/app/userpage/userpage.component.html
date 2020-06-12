@@ -35,7 +35,19 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
 
 <div *ngSwitchCase = "1">
     
-  <div><br><br><br><br><br>lets see</div>
+  <div><br><br><br>Update User info</div>
+  <form>
+    <div>Change First Name?
+      <input [(ngModel)] = "user.firstName" name = "user.firstName" usertype = "text">
+    </div>
+    <div>Change Last Name?
+      <input [(ngModel)] = "user.lastName" name = "user.lastName" type = "text">
+    </div>
+    <div>Change Email?
+      <input [(ngModel)] = "user.email" name = "user.email"  type = "text">
+    </div>
+    <button type = "submit" (click) = "updateInfo()" value = "Save"></button>
+</form>
 </div>
 <div *ngSwitchCase = "2">
 <br><br><br><br><br>{{searchedUser.username}}
