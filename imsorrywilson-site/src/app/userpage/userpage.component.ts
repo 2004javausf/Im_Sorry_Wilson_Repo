@@ -53,13 +53,10 @@ export class UserpageComponent implements OnInit {
     this.user = this.userservice.getIndividualUser();
     this.postservice.getPostData().subscribe(res => this.posts = res);
   }
-<<<<<<< HEAD
-  
-=======
 
->>>>>>> 4776f23eda0ae87a11a31af1e43796cdf2a637f4
   charactersRemaining = '200';
   current = '';
+  
   updateCountdown(){
     this.charactersRemaining = (199 - this.current.length).toString();
   }
