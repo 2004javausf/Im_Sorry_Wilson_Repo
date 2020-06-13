@@ -96,6 +96,6 @@ public class UserController {
 	@ResponseBody()
 	
 	public int updateInformation(@RequestBody User u) {
-		return this.userService.updateInformation(u.getFirstName(), u.getLastName(), u.getEmail(), u.getUsername());
+		return this.userService.updateInformation(u.getFirstName(), u.getLastName(), u.getEmail(),u.getPic(), u.getUsername());
 	}
 }

@@ -46,6 +46,7 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
     <div>Change Your Email?
       <input [(ngModel)] = "user.email" name = "user.email"  type = "text" placeholder="New Email">
     </div>
+    <input type="file" id = "postPic" name="postPic" ngModel  #postPic="ngModel" accept = "image/*" (change)="fileChange1($event)"/><br>
     <br>
     <button type = "submit" (click) = "updateInfo()" value = "Save" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-save"></i>  Submit Changes</button>
 </form>
@@ -70,7 +71,7 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
         <div class="w3-card w3-round w3-white">
           <div class="w3-container">
            <h4 class="w3-center">{{searchedUser.username}}'s Page</h4>
-           <p class="w3-center"><img src="C:/Users/User/Desktop/jason.png" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
+           <img [src]="'data:image/jpg;base64,' + searchedUser.pic" alt="" height = "50px" width = "50px">
            <hr>
            <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> {{searchedUser.firstName}}</p>
            <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> {{searchedUser.lastName}}</p>
@@ -133,7 +134,7 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
                     <div><h6>{{post.postDate}}</h6></div>
                     {{post.post}}
                     <div>likes: {{post.likeCount}}</div>
-                    {{post.pic}}
+                    <img [src]="'data:image/jpg;base64,' + post.pic" alt="" height = "100px" width = "100px">
                     <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like</button> 
                     <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button> 
                   </div>
@@ -197,7 +198,7 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
         <div class="w3-card w3-round w3-white">
           <div class="w3-container">
            <h4 class="w3-center">My Profile Page</h4>
-           <p class="w3-center"><img src="C:/Users/User/Desktop/jason.png" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
+           <img [src]="'data:image/jpg;base64,' + user.pic" alt="" height = "50px" width = "50px">
            <hr>
            <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> {{user.firstName}}</p>
            <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> {{user.lastName}}</p>
@@ -275,7 +276,7 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
                       <div><h6>{{post.postDate}}</h6></div>
                       {{post.post}}
                       <div>likes: {{post.likeCount}}</div>
-                      {{post.pic}}
+                      <img [src]="'data:image/jpg;base64,' + post.pic" alt="" height = "100px" width = "100px">
                       <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like</button> 
                       <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button> 
                     </div>
@@ -439,7 +440,7 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
                     <div><h6>{{post.postDate}}</h6></div>
                     {{post.post}}
                     <div>likes: {{post.likeCount}}</div>
-                    {{post.pic}}
+                    <img [src]="'data:image/jpg;base64,' + post.pic" alt="" height = "100px" width = "100px">
                     <mat-checkbox value = "radioStatus" (click) = "like(radioStatus, post.id,post.likeCount)" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like</mat-checkbox>  
                     <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button> 
                   </div>
