@@ -1,5 +1,5 @@
 export interface Posts{
-    ID:number,
+    id:number,
     userID: number,
     post:string,
     pic: FormData,
