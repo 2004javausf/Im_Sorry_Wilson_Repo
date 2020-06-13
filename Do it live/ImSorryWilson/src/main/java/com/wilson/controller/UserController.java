@@ -1,8 +1,5 @@
 package com.wilson.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.wilson.entity.Login;
 import com.wilson.entity.User;
 import com.wilson.service.UserService;
 
@@ -31,6 +27,7 @@ public class UserController {
 	@ResponseBody()
 	public User getUserAuthenticate(@RequestParam String username, @RequestParam String password){
 		return userService.login(username, password);
+
 	}
 	
 	@RequestMapping(value = "/findbyusername", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -51,5 +48,11 @@ public class UserController {
 	@ResponseBody()
 	public int updatePassword(@RequestParam String newPassword, @RequestParam int userID) {
 		return this.userService.updatePassword(newPassword, userID);
+	}
+
+	@RequestMapping(value= "/updateinfo", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody()
+	public int updateInformation(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String username) {
+		return this.userService.updateInformation(firstName, lastName, email, username);
 	}
 }

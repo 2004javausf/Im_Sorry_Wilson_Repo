@@ -27,4 +27,13 @@ export class UsersService {
   getIndividualUser(){
     return this.user;
   }
+
+  searchForUser(username):Observable<Users>{
+    console.log(username);
+    return this.httpclient.post<any>('http://localhost:8080/user/findbyusername',username);
+  }
+
+  // updateInfo(data:any):Observable<any>{
+    
+  // }
 }
