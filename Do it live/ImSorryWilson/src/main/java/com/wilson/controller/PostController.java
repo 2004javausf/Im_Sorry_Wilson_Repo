@@ -1,6 +1,5 @@
 package com.wilson.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wilson.entity.Post;
-import com.wilson.entity.User;
 import com.wilson.service.PostService;
 
 @RestController
@@ -43,6 +41,7 @@ public class PostController {
 		@RequestMapping(value= "/newpost", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 		@ResponseBody()
 		public Post addNewPost(@RequestBody Post post) {
+			post.setPostDate();
 			return this.postService.addPost(post);
 		}
 }
