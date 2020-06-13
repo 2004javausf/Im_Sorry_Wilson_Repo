@@ -53,6 +53,7 @@ export class UserpageComponent implements OnInit {
     this.user = this.userservice.getIndividualUser();
     this.postservice.getPostData().subscribe(res => this.posts = res);
   }
+
   charactersRemaining = '200';
   current = '';
   updateCountdown(){
@@ -81,6 +82,7 @@ export class UserpageComponent implements OnInit {
   }
   postIt(){
     console.log(this.current);
+    this.post.userID = this.user.id;
     let s = this.postPic.name;
     let j = s.split(".");
     let fname = this.user.username + ".png";
@@ -104,7 +106,26 @@ export class UserpageComponent implements OnInit {
     this.data.firstName = this.user.firstName;
     this.data.lastName = this.user.lastName;
     this.data.email = this.user.email;
-    console.log(this.data);
+    this.data.username = this.user.username;
+    this.userservice.updateInfo(this.data).subscribe();
+  }
+
+  vPassword = "";
+  isHidden = true;
+  verifyPassword(){
+    if (this.vPassword == this.user.password){
+      this.isHidden = false;
+    }else{
+      window.alert('Password does not match');
+    }
+  }
+
+  newPassword = "";
+  updatePassword(){
+    console.log(this.newPassword);
+    this.user.password = this.newPassword;
+    console.log(this.user.password);
+    this.userservice.updatePassword(this.user).subscribe();
   }
   logout(){
     this.router.navigate(['login']);
