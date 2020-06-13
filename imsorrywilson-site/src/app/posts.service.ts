@@ -22,6 +22,7 @@ export class PostsService {
   constructor(private httpclient:HttpClient) { }
 
   httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' })};
+  
   getPostData():Observable<Posts[]>{
     return this.httpclient.get<Posts[]>('http://localhost:8080/home/feed',this.httpOptions);
   }

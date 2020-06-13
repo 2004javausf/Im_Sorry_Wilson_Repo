@@ -53,6 +53,7 @@ export class UserpageComponent implements OnInit {
     this.user = this.userservice.getIndividualUser();
     this.postservice.getPostData().subscribe(res => this.posts = res);
   }
+  
   charactersRemaining = '200';
   current = '';
   updateCountdown(){
@@ -62,6 +63,7 @@ export class UserpageComponent implements OnInit {
   homie(){
     this.home = 0;
   }
+
   settings(){
     this.home = 1;
   }
@@ -71,14 +73,12 @@ export class UserpageComponent implements OnInit {
     this.home = 2;
     this.userservice.searchForUser(f.value).subscribe(res => this.searchedUser = res);
   }
-  profile(){
-    this.home = 3;
-  }
 
   postPic = null;
   fileChange(event){
     this.postPic = event.target.files[0];
   }
+
   postIt(){
     console.log(this.current);
     let s = this.postPic.name;
@@ -99,16 +99,17 @@ export class UserpageComponent implements OnInit {
     username:this.user.username
   }
     
-  
   updateInfo(){
     this.data.firstName = this.user.firstName;
     this.data.lastName = this.user.lastName;
     this.data.email = this.user.email;
     console.log(this.data);
   }
+
   profile(){
     this.home = 3;
   }
+
   logout(){
     this.router.navigate(['login']);
   }
