@@ -48,13 +48,13 @@ public class PostController {
 		
 		@RequestMapping(value= "/addlike", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 		@ResponseBody()
-		public int addLikeCount(@RequestParam int postID) {
+		public int addLikeCount(@RequestBody int postID) {
 			return this.postService.addLikeCount(postID);
 		}
 		
 		@RequestMapping(value= "/sublike", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 		@ResponseBody()
-		public int subtractLikeCount(@RequestParam int postID) {
+		public int subtractLikeCount(@RequestBody int postID) {
 			return this.postService.subtractLikeCount(postID);
 		}
 }

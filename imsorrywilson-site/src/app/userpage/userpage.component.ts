@@ -5,6 +5,9 @@ import { Users } from '../Users';
 import { Posts } from '../Posts';
 import { PostsService } from '../posts.service';
 import { DataSend } from '../data';
+import { ReadVarExpr } from '@angular/compiler';
+import { rejects } from 'assert';
+import { splitAtColon } from '@angular/compiler/src/util';
 
 
 @Component({
@@ -41,7 +44,7 @@ export class UserpageComponent implements OnInit {
   posts:Posts[];
 
   post:Posts={
-    ID:0,
+    id:0,
     userID: this.user.id,
     post:"",
     pic: null,
@@ -76,21 +79,31 @@ export class UserpageComponent implements OnInit {
     this.home = 3;
   }
 
-  postPic = null;
+  changeFile(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  }
+  imagePreview:any;
+  postPic:any;
   fileChange(event){
     this.postPic = event.target.files[0];
+    if(event.target.value){
+      const file = event.target.files[0];
+      this.changeFile(file).then((base64:string):any=>{
+       this.imagePreview = [base64];
+        this.postPic = base64;
+        this.post.pic = this.postPic.split(',')[1];
+      })
+    }
   }
+  image;
   postIt(){
-    console.log(this.current);
     this.post.userID = this.user.id;
-    let s = this.postPic.name;
-    let j = s.split(".");
-    let fname = this.user.username + ".png";
-    let imgData = new FormData();
-    imgData.append('imagefile',this.postPic,fname);
-    console.log(imgData);
     this.post.post = this.current;
-    this.post.pic = imgData;
     this.postservice.newPost(this.post).subscribe();
   }
 
@@ -98,15 +111,28 @@ export class UserpageComponent implements OnInit {
     firstName: this.user.firstName,
     lastName:this.user.lastName,
     email:this.user.email,
+    pic: this.user.pic,
     username:this.user.username
   }
     
-  
+  fileChange1(event){
+    this.postPic = event.target.files[0];
+    if(event.target.value){
+      const file = event.target.files[0];
+      this.changeFile(file).then((base64:string):any=>{
+       this.imagePreview = [base64];
+        this.postPic = base64;
+        this.user.pic = this.postPic.split(',')[1];
+      })
+    }
+  }
   updateInfo(){
     this.data.firstName = this.user.firstName;
     this.data.lastName = this.user.lastName;
     this.data.email = this.user.email;
+    this.data.pic = this.user.pic;
     this.data.username = this.user.username;
+    
     this.userservice.updateInfo(this.data).subscribe();
   }
 
@@ -127,6 +153,19 @@ export class UserpageComponent implements OnInit {
     console.log(this.user.password);
     this.userservice.updatePassword(this.user).subscribe();
   }
+  radioStatus:boolean = true;
+  like(event,id,like){
+    this.radioStatus = !event;
+    console.log(event);
+    console.log(id);
+    console.log(like);
+    if(event == true){
+     this.postservice.likePost(id).subscribe();
+    }else if(event == false){
+      this.postservice.unLikePost(id).subscribe();
+    }
+  }
+
   logout(){
     this.router.navigate(['login']);
   }

@@ -1,8 +1,8 @@
 export interface Posts{
-    ID:number,
+    id:number,
     userID: number,
     post:string,
-    pic: FormData,
+    pic: File,
     likeCount:number,
     postDate:string
 }
