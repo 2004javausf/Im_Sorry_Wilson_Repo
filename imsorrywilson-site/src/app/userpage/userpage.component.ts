@@ -41,7 +41,7 @@ export class UserpageComponent implements OnInit {
   posts:Posts[];
 
   post:Posts={
-    ID:0,
+    id:0,
     userID: this.user.id,
     post:"",
     pic: null,
@@ -127,6 +127,19 @@ export class UserpageComponent implements OnInit {
     console.log(this.user.password);
     this.userservice.updatePassword(this.user).subscribe();
   }
+  radioStatus:boolean = true;
+  like(event,id,like){
+    this.radioStatus = !event;
+    console.log(event);
+    console.log(id);
+    console.log(like);
+    if(event == true){
+     this.postservice.likePost(id).subscribe();
+    }else if(event == false){
+      this.postservice.unLikePost(id).subscribe();
+    }
+  }
+
   logout(){
     this.router.navigate(['login']);
   }
