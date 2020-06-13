@@ -25,15 +25,4 @@
     </div> 
 </div>
 </Form>
-
-<!--Separate the image submission due to JSON parsing/conversion issues-->
-    <Form>
-        <div><br>
-            <label for="pic" style="position:absolute;">(Optional) Upload Profile Pic</label>
-            <input type="file" id = "pic" name="pic" ngModel  #pic="ngModel" accept = "image/*" (change)="fileChange($event)"/>
-        </div>
-        <div>
-            <input type="submit" [disabled]="!r.valid" value="Upload Image" (click)="onUpload(r)"/>  
-        </div> 
-    </Form>
 </body>

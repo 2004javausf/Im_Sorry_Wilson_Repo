@@ -10,44 +10,53 @@
 <style>
 html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
 </style>
-<header class="w3-theme-l5">
- 
- 
-</header>
 <div [ngSwitch] = "home">
+  
+
 <body class="w3-theme-l5">
-
-
-
-     <!-- Navbar -->
-<div class="w3-top">
-  <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
- 
-   <button (click) = "homie()" class="w3-bar-item w3-button w3-padding-large w3-theme-d4" title="Home"><i class="fa fa-home w3-margin-right"></i>I'm Sorry Wilson</button>
-   <button (click) = "settings()" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Account Settings"><i class="fa fa-gear"></i></button>
-   <button (click) = "profile()" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Profile"><i class="fa fa-user"></i></button>
-   <button class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Friend Requests"><i class="fa fa-group"></i></button>
-   <form>
-   <input type="text" placeholder="Search other users" class="w3-bar-item w3-input w3-hide-small w3-padding-large w3-hover-white " title="Search"><i></i>
-   <button type = "submit" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" (click) = "search"><i class="fa fa-search"></i></button>
-   </form>
-   <div>
-     <button (click) = "logout()" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="Log Out"><i class="fa fa-sign-out w3-margin-right"></i>Log Out</button>
+  
+  <!-- Navbar -->
+  <div class="w3-top">
+    <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
+     <button (click) = "homie()" class="w3-bar-item w3-button w3-padding-large w3-theme-d4" title="Home"><i class="fa fa-home w3-margin-right"></i>I'm Sorry Wilson</button>
+     <button (click) = "settings()" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Account Settings"><i class="fa fa-gear"></i></button>
+     <button (click) = "profile()" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Profile"><i class="fa fa-user"></i></button>
+     <button class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Friend Requests"><i class="fa fa-group"></i></button>
+     <form #f="ngForm" (ngSubmit)="search(f)">
+      <input type="text" name="username" ngModel required #username="ngModel" placeholder="Search other users" class="w3-bar-item w3-input w3-hide-small w3-padding-large w3-hover-white " title="Search"><i></i>
+      <button type = "submit" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"><i class="fa fa-search"></i></button>
+     </form>
+     <div>
+       <button (click) = "logout()" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="Log Out"><i class="fa fa-sign-out w3-margin-right"></i>Log Out</button>
+     </div>
+    </div>
    </div>
-  </div>
- </div>
 
- <!-- Switch statement to change between views upon button press -->
 
- <div *ngSwitchcase = "1">settings
-  <br>
-  <br>
-  <br>
-  <h1>Test</h1>
+<div *ngSwitchCase = "1">
+    
+  <div><br><br><br>Update User info</div>
+  <form>
+    <div>Change First Name?
+      <input [(ngModel)] = "user.firstName" name = "user.firstName" usertype = "text">
+    </div>
+    <div>Change Last Name?
+      <input [(ngModel)] = "user.lastName" name = "user.lastName" type = "text">
+    </div>
+    <div>Change Email?
+      <input [(ngModel)] = "user.email" name = "user.email"  type = "text">
+    </div>
+    <button type = "submit" (click) = "updateInfo()" value = "Save"></button>
+</form>
 </div>
-<div *ngSwitchcase = "2">search</div>
-<div *ngSwitchcase = "3">profile</div>
+<div *ngSwitchCase = "2">
+<br><br><br><br><br>{{searchedUser.username}}
+<div *ngFor = "let post of posts">
+  {{post.post}}
+</div>
+</div>
 <div *ngSwitchCase="0">
+
 
 <!-- Page Container -->
 <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">    
@@ -147,9 +156,13 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
         <div class="w3-col m12">
           <div class="w3-card w3-round w3-white">
             <div class="w3-container w3-padding">
-              <h4 class="w3-opacity">What are you feeling?</h4>
-              <p contenteditable="true" class="w3-border w3-padding" placeholder="What are you feeling?"></p>
-              <button type="button" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Post</button> 
+              <form>
+                <h6 class="w3-opacity">What would you like to post?</h6>
+                <textarea [(ngModel)] = "current" name = "current" (keypress) = "updateCountdown()" class = "message" placeholder="Hello, child." rows = "5" cols = "70" maxlength = "200"></textarea>
+                <h6>Characters remaining: {{ charactersRemaining }}</h6>
+                <input type="file" id = "postPic" name="postPic" ngModel  #postPic="ngModel" accept = "image/*" (change)="fileChange($event)"/><br>
+                <button type="button" (click) = "postIt()" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Post</button> 
+              </form>
             </div>
           </div>
         </div>
@@ -246,19 +259,8 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
 <!-- End Page Container -->
 </div>
 
-</div>
 
 
-<br>
-
-<!-- Footer -->
-<footer class="w3-container w3-theme-d3 w3-padding-16">
-  <h5>I'm Sorry Wilson</h5>
-</footer>
-
-<footer class="w3-container w3-theme-d5">
-  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">I'm Sorry Wilson</a></p>
-</footer>
  
 <script>
 // Accordion
@@ -284,8 +286,10 @@ function openNav() {
   }
 }
 </script>
-
-</body>
 </div>
+</body>
+
+</div>
+<br>
 </html> 
 
