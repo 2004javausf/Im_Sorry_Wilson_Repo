@@ -137,8 +137,8 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
                     <img [src]="'data:image/jpg;base64,' + post.pic" alt="" height = "100px" width = "100px">
                     <form>
                       <mat-checkbox value = "radioStatus" (click) = "like(radioStatus, post.id,post.likeCount)" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like</mat-checkbox> 
-                      <button (click) = "commentOn(post.id,user.username)" type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button> 
-                      <textarea [(ngModel)] = "comment.comment" name = comment.comment class = "message" placeholder="Write a comment" rows = "5" cols = "70" maxlength = "100"></textarea>
+                      <button (click) = "commentOn(post.id,user.username,commented)" type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button> 
+                      <textarea id = {{post.id}} #commented name = comment.comment class = "message" placeholder="Write a comment" rows = "5" cols = "70" maxlength = "100"></textarea>
                     </form> 
                   </div>
                 </div>
@@ -287,8 +287,8 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
                       <img [src]="'data:image/jpg;base64,' + post.pic" alt="" height = "100px" width = "100px">
                       <form>
                         <mat-checkbox value = "radioStatus" (click) = "like(radioStatus, post.id,post.likeCount)" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like</mat-checkbox> 
-                        <button (click) = "commentOn(post.id,user.username)" type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button> 
-                        <textarea [(ngModel)] = "comment.comment" name = comment.comment class = "message" placeholder="Write a comment" rows = "5" cols = "70" maxlength = "100"></textarea>
+                        <button (click) = "commentOn(post.id,user.username,commented)" type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button> 
+                        <textarea id = {{post.id}} #commented class = "message" placeholder="Write a comment" rows = "5" cols = "70" maxlength = "100"></textarea>
                       </form> 
                     </div>
                   </div>
@@ -459,8 +459,8 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
                     <img [src]="'data:image/jpg;base64,' + post.pic" alt="" height = "100px" width = "100px">
                     <form>
                       <mat-checkbox value = "radioStatus" (click) = "like(radioStatus, post.id,post.likeCount)" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like</mat-checkbox> 
-                      <button (click) = "commentOn(post.id,user.username)" type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button> 
-                      <textarea [(ngModel)] = "comment.comment" name = comment.comment class = "message" placeholder="Write a comment" rows = "5" cols = "70" maxlength = "100"></textarea>
+                      <button (click) = "commentOn(post.id,user.username, commented.value)" type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button> 
+                      <textarea id = {{post.id}} #commented  class = "message" placeholder="Write a comment" rows = "5" cols = "70" maxlength = "100"></textarea>
                     </form> 
                   </div>
                 </div>

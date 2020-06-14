@@ -202,10 +202,10 @@ export class UserpageComponent implements OnInit {
   updateCommentText(){
     console.log("now what")
   }
-  commentOn(postID,username){
+  commentOn(postID,username,comment){
     this.comment.postID = postID;
     this.comment.userName = username;
-    console.log(this.comment);
+    this.comment.comment = comment;
     this.commentservice.addComment(this.comment).subscribe();
   }
   logout(){
