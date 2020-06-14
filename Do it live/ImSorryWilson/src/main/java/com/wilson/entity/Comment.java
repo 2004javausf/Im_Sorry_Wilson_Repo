@@ -19,8 +19,8 @@ public class Comment {
 	private int ID;
 	@Column(name="POST_ID")
 	private int postID;
-	@Column(name="USER_ID")
-	private int userID;
+	@Column(name="USER_NAME")
+	private String userName;
 	@Column(name="USER_COMMENT")
 	private String comment;
 	@Column(name="COMMENT_DATE")
@@ -33,10 +33,11 @@ public class Comment {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Comment(int postID, int userID, String comment, Date commentDate) {
+	public Comment(int ID, int postID, String userName, String comment, Date commentDate) {
 		super();
+		this.ID = ID;
 		this.postID = postID;
-		this.userID = userID;
+		this.userName = userName;
 		this.comment = comment;
 		this.commentDate = commentDate;
 }	
@@ -55,12 +56,12 @@ public class Comment {
 		this.postID = postID;
 	}
 
-	public int getUser() {
-		return userID;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setUser(int userID) {
-		this.userID = userID;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getComment() {
@@ -83,7 +84,7 @@ public class Comment {
 //------------------------TO-STRING-------------------------
 	@Override
 	public String toString() {
-		return "Comment [ID=" + ID + ", post=" + postID + ", user=" + userID + ", comment=" + comment + ", commentDate="
+		return "Comment [ID=" + ID + ", post=" + postID + ", user=" + userName + ", comment=" + comment + ", commentDate="
 				+ commentDate + "]";
 	}	
 //----------------------------------------------------------

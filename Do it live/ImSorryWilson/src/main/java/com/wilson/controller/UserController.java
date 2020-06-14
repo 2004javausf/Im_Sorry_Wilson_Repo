@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wilson.entity.Login;
@@ -21,7 +23,7 @@ import com.wilson.util.LogThis;
 
 @RestController
 @RequestMapping("/user")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin
 
 public class UserController {
 	private UserService userService;
@@ -30,13 +32,9 @@ public class UserController {
 		this.userService = userService;
 	}
 	
-	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/login")
+	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody()
-<<<<<<< HEAD
-	public User getUserAuthenticate(@RequestParam String username, @RequestParam String password){
-		LogThis.LogIt("info", "User:" +username+ " logged in!");
-		return userService.login(username, password);
-=======
 	public User getUser(@RequestBody User user){
 		List<User> temp = new ArrayList<User>();
 		User ret = new User();
@@ -49,13 +47,13 @@ public class UserController {
 				i=temp.size();
 			}
 		}
-		
+		LogThis.LogIt("info", "User:" +ret.getUsername()+ " logged in!");
 		return ret;
->>>>>>> 744cd2b4198f1aaa810347e50f320382166b9e4e
 	}
 	
 
-	@RequestMapping(value = "/findbyusername", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/findbyusername")
+	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody()
 	public User getUserByUsername(@RequestBody User user){
 		List<User> temp = new ArrayList<User>();
@@ -72,7 +70,8 @@ public class UserController {
 	}
 
 	
-	@RequestMapping(value = "/findbyid", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/findbyid")
+	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody()
 	public User getUserById(@RequestBody User user){
 		List<User> temp = new ArrayList<User>();
@@ -88,22 +87,24 @@ public class UserController {
 		return ret; //Returns json with null values if does not exist, filled json if it does.
 	}
 	
-	@RequestMapping(value= "/register", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value= "/register")
+	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody()
 	public User addNewUser(@RequestBody User user) {
 		LogThis.LogIt("info", "Account:" +user.getUsername()+ " was created!");
 		return this.userService.addUser(user);
 	}
 	
-	@RequestMapping(value= "/updatepassword", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value= "/updatepassword")
+	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody()
 	public int updatePassword(@RequestBody User user) {
 		return this.userService.updatePassword(user.getPassword(), user.getId());
 	}
 	
-	@RequestMapping(value= "/updateinfo", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value= "/updateinfo")
+	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody()
-	
 	public int updateInformation(@RequestBody User u) {
 		return this.userService.updateInformation(u.getFirstName(), u.getLastName(), u.getEmail(),u.getPic(), u.getUsername());
 	}
