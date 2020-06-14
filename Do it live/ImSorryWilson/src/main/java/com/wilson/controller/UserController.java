@@ -17,10 +17,12 @@ import com.wilson.entity.Login;
 import com.wilson.entity.User;
 import com.wilson.service.PostService;
 import com.wilson.service.UserService;
+import com.wilson.util.LogThis;
 
 @RestController
 @RequestMapping("/user")
 @CrossOrigin(origins = "http://localhost:4200")
+
 public class UserController {
 	private UserService userService;
 	@Autowired
@@ -31,6 +33,7 @@ public class UserController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody()
 	public User getUserAuthenticate(@RequestParam String username, @RequestParam String password){
+		LogThis.LogIt("info", "User:" +username+ " logged in!");
 		return userService.login(username, password);
 	}
 	
@@ -61,6 +64,7 @@ public class UserController {
 	@RequestMapping(value= "/register", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody()
 	public User addNewUser(@RequestBody User user) {
+		LogThis.LogIt("info", "Account:" +user.getUsername()+ " was created!");
 		return this.userService.addUser(user);
 	}
 	

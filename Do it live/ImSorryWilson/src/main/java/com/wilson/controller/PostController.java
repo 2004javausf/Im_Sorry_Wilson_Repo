@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.wilson.entity.Post;
 import com.wilson.entity.User;
 import com.wilson.service.PostService;
+import com.wilson.util.LogThis;
 
 @RestController
 @RequestMapping("/home")
@@ -43,12 +44,14 @@ public class PostController {
 		@RequestMapping(value= "/newpost", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 		@ResponseBody()
 		public Post addNewPost(@RequestBody Post post) {
+			LogThis.LogIt("info", "Post was created by User Number:" +post.getUserID()+"!");
 			return this.postService.addPost(post);
 		}
 		
 		@RequestMapping(value= "/addlike", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 		@ResponseBody()
 		public int addLikeCount(@RequestParam int postID) {
+			LogThis.LogIt("info", "Post Number:" +postID+ " was liked!");
 			return this.postService.addLikeCount(postID);
 		}
 		
