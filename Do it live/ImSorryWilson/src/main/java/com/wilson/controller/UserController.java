@@ -32,11 +32,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody()
-<<<<<<< HEAD
-	public User getUserAuthenticate(@RequestParam String username, @RequestParam String password){
-		LogThis.LogIt("info", "User:" +username+ " logged in!");
-		return userService.login(username, password);
-=======
+
 	public User getUser(@RequestBody User user){
 		List<User> temp = new ArrayList<User>();
 		User ret = new User();
@@ -49,9 +45,8 @@ public class UserController {
 				i=temp.size();
 			}
 		}
-		
+		LogThis.LogIt("info", "User:" +ret.getUsername()+ " logged in!");
 		return ret;
->>>>>>> 744cd2b4198f1aaa810347e50f320382166b9e4e
 	}
 	
 

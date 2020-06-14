@@ -50,12 +50,8 @@ public class PostController {
 		
 		@RequestMapping(value= "/addlike", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 		@ResponseBody()
-<<<<<<< HEAD
 		public int addLikeCount(@RequestParam int postID) {
 			LogThis.LogIt("info", "Post Number:" +postID+ " was liked!");
-=======
-		public int addLikeCount(@RequestBody int postID) {
->>>>>>> 744cd2b4198f1aaa810347e50f320382166b9e4e
 			return this.postService.addLikeCount(postID);
 		}
 		
