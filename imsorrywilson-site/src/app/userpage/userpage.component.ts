@@ -42,7 +42,13 @@ export class UserpageComponent implements OnInit {
   home:number = 0; //0 for user page, 1 for settings page, 2 for search //3 for user profile page
 
   posts:Posts[];
+  
 
+  get sortData(){
+    return this.posts.sort((a,b) =>{
+      return <any>new Date(b.postDate) - <any>new Date(a.postDate);
+    });
+  }
   post:Posts={
     id:0,
     userID: this.user.id,
@@ -105,6 +111,15 @@ export class UserpageComponent implements OnInit {
     this.post.userID = this.user.id;
     this.post.post = this.current;
     this.postservice.newPost(this.post).subscribe();
+    window.alert("Your post has been made!");
+    this.post.id=0;
+    this.post.userID= this.user.id;
+    this.post.post="";
+    this.post.pic= null;
+    this.post.likeCount= 0;
+    this.post.postDate="";
+    this.current = "";
+    this.postPic = null;
   }
 
   data:DataSend={
@@ -132,8 +147,9 @@ export class UserpageComponent implements OnInit {
     this.data.email = this.user.email;
     this.data.pic = this.user.pic;
     this.data.username = this.user.username;
-    
     this.userservice.updateInfo(this.data).subscribe();
+    window.alert("Your changes have been saved");
+    this.home = 0;
   }
 
   vPassword = "";
@@ -152,6 +168,10 @@ export class UserpageComponent implements OnInit {
     this.user.password = this.newPassword;
     console.log(this.user.password);
     this.userservice.updatePassword(this.user).subscribe();
+    window.alert("Your password has been updated");
+    this.vPassword = "";
+    this.isHidden = true;
+    this.home = 0;
   }
   radioStatus:boolean = true;
   like(event,id,like){
@@ -166,7 +186,14 @@ export class UserpageComponent implements OnInit {
     }
   }
 
+  isHidden1 = true;
+  comment(){
+    this.isHidden1 = false;
+  }
   logout(){
     this.router.navigate(['login']);
   }
 }
+
+
+

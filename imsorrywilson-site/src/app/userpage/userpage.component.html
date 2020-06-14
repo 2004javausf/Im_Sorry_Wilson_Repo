@@ -431,7 +431,7 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
         </div>
       </div>
       <div class="w3-col m7">
-        <div *ngFor = "let post of posts">
+        <div *ngFor = "let post of sortData">
           
             <div class="w3-row-padding">
               <div class="w3-col m12">
@@ -442,7 +442,8 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
                     <div>likes: {{post.likeCount}}</div>
                     <img [src]="'data:image/jpg;base64,' + post.pic" alt="" height = "100px" width = "100px">
                     <mat-checkbox value = "radioStatus" (click) = "like(radioStatus, post.id,post.likeCount)" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like</mat-checkbox>  
-                    <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button> 
+                    <button (click) = "comment()" type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button> 
+                    <textarea class = "message" placeholder="Write a comment" rows = "5" cols = "70" maxlength = "100"></textarea>
                   </div>
                 </div>
              </div>

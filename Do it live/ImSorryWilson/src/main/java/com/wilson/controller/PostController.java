@@ -20,7 +20,7 @@ import com.wilson.util.LogThis;
 
 @RestController
 @RequestMapping("/home")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin
 public class PostController {
 	
 		private PostService postService;
