@@ -5,6 +5,9 @@ import { Users } from '../Users';
 import { Posts } from '../Posts';
 import { PostsService } from '../posts.service';
 import { DataSend } from '../data';
+import { ReadVarExpr } from '@angular/compiler';
+import { rejects } from 'assert';
+import { splitAtColon } from '@angular/compiler/src/util';
 
 
 @Component({
@@ -75,22 +78,35 @@ export class UserpageComponent implements OnInit {
     this.userservice.searchForUser(f.value).subscribe(res => this.searchedUser = res);
   }
 
-  postPic = null;
+  changeFile(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  }
+  imagePreview:any;
+  postPic:any;
   fileChange(event){
     this.postPic = event.target.files[0];
+    if(event.target.value){
+      const file = event.target.files[0];
+      this.changeFile(file).then((base64:string):any=>{
+       this.imagePreview = [base64];
+        this.postPic = base64;
+        this.post.pic = this.postPic.split(',')[1];
+      })
+    }
   }
+<<<<<<< HEAD
 
+=======
+  image;
+>>>>>>> fd1e78051fe926b453227d3a3b0fbc978e451c51
   postIt(){
-    console.log(this.current);
     this.post.userID = this.user.id;
-    let s = this.postPic.name;
-    let j = s.split(".");
-    let fname = this.user.username + ".png";
-    let imgData = new FormData();
-    imgData.append('imagefile',this.postPic,fname);
-    console.log(imgData);
     this.post.post = this.current;
-    this.post.pic = imgData;
     this.postservice.newPost(this.post).subscribe();
   }
 
@@ -98,14 +114,31 @@ export class UserpageComponent implements OnInit {
     firstName: this.user.firstName,
     lastName:this.user.lastName,
     email:this.user.email,
+    pic: this.user.pic,
     username:this.user.username
   }
     
+<<<<<<< HEAD
+=======
+  fileChange1(event){
+    this.postPic = event.target.files[0];
+    if(event.target.value){
+      const file = event.target.files[0];
+      this.changeFile(file).then((base64:string):any=>{
+       this.imagePreview = [base64];
+        this.postPic = base64;
+        this.user.pic = this.postPic.split(',')[1];
+      })
+    }
+  }
+>>>>>>> fd1e78051fe926b453227d3a3b0fbc978e451c51
   updateInfo(){
     this.data.firstName = this.user.firstName;
     this.data.lastName = this.user.lastName;
     this.data.email = this.user.email;
+    this.data.pic = this.user.pic;
     this.data.username = this.user.username;
+    
     this.userservice.updateInfo(this.data).subscribe();
   }
 

@@ -27,11 +27,27 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  fileChange(event){
-    this.user.pic = event.target.files[0];
+  changeFile(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
   }
-
- 
+  imagePreview:any;
+  postPic:any;
+  fileChange(event){
+    this.postPic = event.target.files[0];
+    if(event.target.value){
+      const file = event.target.files[0];
+      this.changeFile(file).then((base64:string):any=>{
+        this.postPic = base64;
+        this.user.pic = this.postPic.split(',')[1];
+      })
+    }
+  }
+  image;
   onSubmit(r){
     console.log(r.value);
     this.user.username = r.value.username;
@@ -39,26 +55,9 @@ export class RegisterComponent implements OnInit {
     this.user.firstName = r.value.firstName;
     this.user.lastName = r.value.lastName;
     this.user.email = r.value.email;
-    //JSON.parse(this.user);
-    //JSON.stringify(this.user.pic)
+   
     this.register.registerUser(this.user).subscribe();
     window.alert("Account Registered!");
     this.router.navigate(['login']);
-  }
-
-  // Placeholder function for the image upload. Needs testing
-  onUpload(r){
-    console.log(r.value);
-    let username = r.value.username;
-    let s = this.user.pic.name;
-    let j = s.split(".");
-    let fname = this.user.username + ".png";
-    let imgData = new FormData();
-    imgData.append('imagefile',this.user.pic,fname);
-    this.httpClient.post("http://localhost:9000/user/updateprofilepic", imgData)
-    .subscribe(x =>{
-      console.log(x);
-    });
-    window.alert("Image Uploaded!");
   }
 }
