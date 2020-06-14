@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wilson.dao.PostDao;
+import com.wilson.entity.Comment;
 import com.wilson.entity.Post;
 
 @Service
