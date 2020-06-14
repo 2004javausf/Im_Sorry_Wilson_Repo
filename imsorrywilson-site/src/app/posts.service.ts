@@ -11,7 +11,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class PostsService {
 
   post:Posts={
-    ID:0,
+    id:0,
     userID: 0,
     post:"",
     pic: null,
@@ -29,5 +29,13 @@ export class PostsService {
   newPost(posts:Posts):Observable<Posts>{
     console.log(posts);
     return this.httpclient.post<any>('http://localhost:8080/home/newpost',posts);
+  }
+  likePost(id:number):Observable<number>{
+    console.log(id);
+    return this.httpclient.post<any>('http://localhost:8080/home/addlike',id)
+  }
+
+  unLikePost(id:number):Observable<number>{
+    return this.httpclient.post<any>('http://localhost:8080/home/sublike',id)
   }
 }

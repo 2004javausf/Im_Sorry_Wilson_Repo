@@ -15,7 +15,7 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
 
 <body class="w3-theme-l5">
   
-  <!-- Navbar -->
+  <!-- Top Navigation Bar -->
   <div class="w3-top">
     <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
      <button (click) = "homie()" class="w3-bar-item w3-button w3-padding-large w3-theme-d4" title="Home"><i class="fa fa-home w3-margin-right"></i>I'm Sorry Wilson</button>
@@ -32,50 +32,313 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
     </div>
    </div>
 
-
+<!-- View for Account Settings -->
 <div *ngSwitchCase = "1">
     
-  <div><br><br><br>Update User info</div>
+  <div><br><br><br>Update User info<br><br></div>
   <form>
     <div>Change First Name?
-      <input [(ngModel)] = "user.firstName" name = "user.firstName" usertype = "text">
+      <input [(ngModel)] = "user.firstName" name = "user.firstName" usertype = "text" placeholder="New First Name">
     </div>
     <div>Change Last Name?
-      <input [(ngModel)] = "user.lastName" name = "user.lastName" type = "text">
+      <input [(ngModel)] = "user.lastName" name = "user.lastName" type = "text" placeholder="New Last Name">
     </div>
-    <div>Change Email?
-      <input [(ngModel)] = "user.email" name = "user.email"  type = "text">
+    <div>Change Your Email?
+      <input [(ngModel)] = "user.email" name = "user.email"  type = "text" placeholder="New Email">
     </div>
-    <button type = "submit" (click) = "updateInfo()" value = "Save"></button>
+    <input type="file" id = "postPic" name="postPic" ngModel  #postPic="ngModel" accept = "image/*" (change)="fileChange1($event)"/><br>
+    <br>
+    <button type = "submit" (click) = "updateInfo()" value = "Save" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-save"></i>  Submit Changes</button>
+</form>
+<form>
+  <div>Change Password?
+    <input [(ngModel)] = "vPassword" name = "vPassword" type = "password">
+    <button type = "submit" (click) = "verifyPassword()" value = "Save" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-save"></i>  Verify</button>
+    <div [hidden] = "isHidden"><input [(ngModel)] = "newPassword" name = "newPassword" type = "password">
+      <button type = "submit" (click) = "updatePassword()" value = "Save" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-save"></i>  Submit Changes</button></div>
+  </div>
 </form>
 </div>
+
+<!-- View for Printing Out Search Results -->
 <div *ngSwitchCase = "2">
-<br><br><br><br><br>{{searchedUser.username}}
-<div *ngFor = "let post of posts">
-  {{post.post}}
+   <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">    
+    <!-- The Grid -->
+    <div class="w3-row">
+      <!-- Left Column -->
+      <div class="w3-col m3">
+        <!-- Profile -->
+        <div class="w3-card w3-round w3-white">
+          <div class="w3-container">
+           <h4 class="w3-center">{{searchedUser.username}}'s Page</h4>
+           <img [src]="'data:image/jpg;base64,' + searchedUser.pic" alt="" height = "50px" width = "50px">
+           <hr>
+           <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> {{searchedUser.firstName}}</p>
+           <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> {{searchedUser.lastName}}</p>
+           <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> {{searchedUser.email}}</p>
+          </div>
+        </div>
+        <br>
+        
+        <!-- Accordion -->
+        <div class="w3-card w3-round">
+          <div class="w3-white">
+            <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> My Groups</button>
+            <div id="Demo1" class="w3-hide w3-container">
+              <p>Some text..</p>
+            </div>
+            <button onclick="myFunction('Demo2')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> My Events</button>
+            <div id="Demo2" class="w3-hide w3-container">
+              <p>Some other text..</p>
+            </div>
+            <button onclick="myFunction('Demo3')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-users fa-fw w3-margin-right"></i> My Photos</button>
+            <div id="Demo3" class="w3-hide w3-container">
+           <div class="w3-row-padding">
+           <br>
+             <div class="w3-half">
+               <img src="/w3images/lights.jpg" style="width:100%" class="w3-margin-bottom">
+             </div>
+             <div class="w3-half">
+               <img src="/w3images/nature.jpg" style="width:100%" class="w3-margin-bottom">
+             </div>
+             <div class="w3-half">
+               <img src="/w3images/mountains.jpg" style="width:100%" class="w3-margin-bottom">
+             </div>
+             <div class="w3-half">
+               <img src="/w3images/forest.jpg" style="width:100%" class="w3-margin-bottom">
+             </div>
+             <div class="w3-half">
+               <img src="/w3images/nature.jpg" style="width:100%" class="w3-margin-bottom">
+             </div>
+             <div class="w3-half">
+               <img src="/w3images/snow.jpg" style="width:100%" class="w3-margin-bottom">
+             </div>
+           </div>
+            </div>
+          </div>      
+        </div>
+        <br>
+        
+      
+      <!-- End Left Column -->
+      </div>
+      
+      <!-- Middle Column -->
+      <div class="w3-col m7">
+        <div *ngFor = "let post of posts">
+          <div *ngIf = "searchedUser.id == post.userID">
+            <div class="w3-row-padding">
+              <div class="w3-col m12">
+                <div class="w3-card w3-round w3-white">
+                  <div class="w3-container w3-padding">
+                    <div><h6>{{post.postDate}}</h6></div>
+                    {{post.post}}
+                    <div>likes: {{post.likeCount}}</div>
+                    <img [src]="'data:image/jpg;base64,' + post.pic" alt="" height = "100px" width = "100px">
+                    <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like</button> 
+                    <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button> 
+                  </div>
+                </div>
+             </div>
+            </div>
+          </div>
+        </div>
+      <!-- End Middle Column -->
+      </div>
+      
+      <!-- Right Column -->
+      <div class="w3-col m2">
+        
+        <div class="w3-card w3-round w3-white w3-center">
+          <div class="w3-container">
+            <p>Friend Request</p>
+            <img src="/w3images/avatar6.png" alt="KittenKillzU" style="width:50%"><br>
+            <span>Jason Knighten</span>
+            <div class="w3-row w3-opacity">
+              <div class="w3-half">
+                <button class="w3-button w3-block w3-green w3-section" title="Accept"><i class="fa fa-check"></i></button>
+              </div>
+              <div class="w3-half">
+                <button class="w3-button w3-block w3-red w3-section" title="Decline"><i class="fa fa-remove"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+        
+        <div class="w3-card w3-round w3-white w3-padding-16 w3-center">
+          <p>We are currently on your profile page</p>
+        </div>
+        <br>
+        
+        <div class="w3-card w3-round w3-white w3-padding-32 w3-center">
+          <p><i class="fa fa-bug w3-xxlarge"></i></p>
+        </div>
+        
+      <!-- End Right Column -->
+      </div>
+      
+    <!-- End Grid -->
+    </div>
+    
+  <!-- End Page Container -->
+  </div>
+ 
 </div>
+
+<!-- View for Profile Page -->
+<div *ngSwitchCase = "3">
+
+  <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">    
+    <!-- The Grid -->
+    <div class="w3-row">
+      <!-- Left Column -->
+      <div class="w3-col m3">
+        <!-- Profile -->
+        <div class="w3-card w3-round w3-white">
+          <div class="w3-container">
+           <h4 class="w3-center">My Profile Page</h4>
+           <img [src]="'data:image/jpg;base64,' + user.pic" alt="" height = "50px" width = "50px">
+           <hr>
+           <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> {{user.firstName}}</p>
+           <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> {{user.lastName}}</p>
+           <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> {{user.email}}</p>
+          </div>
+        </div>
+        <br>
+        
+        <!-- Accordion -->
+        <div class="w3-card w3-round">
+          <div class="w3-white">
+            <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-circle-o-notch fa-fw w3-margin-right"></i> My Groups</button>
+            <div id="Demo1" class="w3-hide w3-container">
+              <p>Some text..</p>
+            </div>
+            <button onclick="myFunction('Demo2')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-calendar-check-o fa-fw w3-margin-right"></i> My Events</button>
+            <div id="Demo2" class="w3-hide w3-container">
+              <p>Some other text..</p>
+            </div>
+            <button onclick="myFunction('Demo3')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-users fa-fw w3-margin-right"></i> My Photos</button>
+            <div id="Demo3" class="w3-hide w3-container">
+           <div class="w3-row-padding">
+           <br>
+             <div class="w3-half">
+               <img src="/w3images/lights.jpg" style="width:100%" class="w3-margin-bottom">
+             </div>
+             <div class="w3-half">
+               <img src="/w3images/nature.jpg" style="width:100%" class="w3-margin-bottom">
+             </div>
+             <div class="w3-half">
+               <img src="/w3images/mountains.jpg" style="width:100%" class="w3-margin-bottom">
+             </div>
+             <div class="w3-half">
+               <img src="/w3images/forest.jpg" style="width:100%" class="w3-margin-bottom">
+             </div>
+             <div class="w3-half">
+               <img src="/w3images/nature.jpg" style="width:100%" class="w3-margin-bottom">
+             </div>
+             <div class="w3-half">
+               <img src="/w3images/snow.jpg" style="width:100%" class="w3-margin-bottom">
+             </div>
+           </div>
+            </div>
+          </div>      
+        </div>
+        <br>
+        
+      
+      <!-- End Left Column -->
+      </div>
+      
+      <!-- Middle Column -->
+      <div class="w3-col m7">
+      
+        <div class="w3-row-padding">
+          <div class="w3-col m12">
+            <div class="w3-card w3-round w3-white">
+              <div class="w3-container w3-padding">
+                <form>
+                  <h4 class="w3-opacity">What would you like to post?</h4>
+                  <textarea [(ngModel)] = "current" name = "current" (keypress) = "updateCountdown()" class = "message" placeholder="Hello, child." rows = "5" cols = "70" maxlength = "200"></textarea>
+                  <h6>Characters remaining: {{ charactersRemaining }}</h6>
+                  <input type="file" id = "postPic" name="postPic" ngModel  #postPic="ngModel" accept = "image/*" (change)="fileChange($event)"/><br>
+                  <button type="button" (click) = "postIt()" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Post</button> 
+                </form>
+              </div>
+            </div>
+          </div>
+          <div *ngFor = "let post of posts">
+            <div *ngIf = "user.id == post.userID">
+              <div class="w3-row-padding">
+                <div class="w3-col m12">
+                  <div class="w3-card w3-round w3-white">
+                    <div class="w3-container w3-padding">
+                      <div><h6>{{post.postDate}}</h6></div>
+                      {{post.post}}
+                      <div>likes: {{post.likeCount}}</div>
+                      <img [src]="'data:image/jpg;base64,' + post.pic" alt="" height = "100px" width = "100px">
+                      <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like</button> 
+                      <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button> 
+                    </div>
+                  </div>
+               </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      <!-- End Middle Column -->
+      </div>
+      
+      
+      <!-- Right Column -->
+      <div class="w3-col m2">
+        
+        <div class="w3-card w3-round w3-white w3-center">
+          <div class="w3-container">
+            <p>Friend Request</p>
+            <img src="/w3images/avatar6.png" alt="KittenKillzU" style="width:50%"><br>
+            <span>Jason Knighten</span>
+            <div class="w3-row w3-opacity">
+              <div class="w3-half">
+                <button class="w3-button w3-block w3-green w3-section" title="Accept"><i class="fa fa-check"></i></button>
+              </div>
+              <div class="w3-half">
+                <button class="w3-button w3-block w3-red w3-section" title="Decline"><i class="fa fa-remove"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+        
+        <div class="w3-card w3-round w3-white w3-padding-16 w3-center">
+          <p>We are currently on your profile page</p>
+        </div>
+        <br>
+        
+        <div class="w3-card w3-round w3-white w3-padding-32 w3-center">
+          <p><i class="fa fa-bug w3-xxlarge"></i></p>
+        </div>
+        
+      <!-- End Right Column -->
+      </div>
+      
+    <!-- End Grid -->
+    </div>
+    
+  <!-- End Page Container -->
+  </div>
+
 </div>
-<div *ngSwitchCase="0">
-
-
-<!-- Page Container -->
-<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">    
+<!-- Home Page View [Default] -->
+<div *ngSwitchCase = "0">
+  <!-- Page Container -->
+  <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">    
   <!-- The Grid -->
   <div class="w3-row">
     <!-- Left Column -->
     <div class="w3-col m3">
-      <!-- Profile -->
-      <div class="w3-card w3-round w3-white">
-        <div class="w3-container">
-         <h4 class="w3-center">My Profile</h4>
-         <p class="w3-center"><img src="C:/Users/User/Desktop/jason.png" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
-         <hr>
-         <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> Designer, UI</p>
-         <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> London, UK</p>
-         <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> April 1, 1988</p>
-        </div>
-      </div>
-      <br>
+      
       
       <!-- Accordion -->
       <div class="w3-card w3-round">
@@ -131,7 +394,7 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
             <span class="w3-tag w3-small w3-theme-l2">Food</span>
             <span class="w3-tag w3-small w3-theme-l3">Design</span>
             <span class="w3-tag w3-small w3-theme-l4">Art</span>
-            <span class="w3-tag w3-small w3-theme-l5">Photos</span>
+            <span class="w3-tag w3-small w3-theme-l5">Casey</span>
           </p>
         </div>
       </div>
@@ -143,7 +406,7 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
           <i class="fa fa-remove"></i>
         </span>
         <p><strong>Hey!</strong></p>
-        <p>People are looking at your profile. Find out who.</p>
+        <p>People are looking at your profile. But this ain't LinkedIn! Click to close.</p>
       </div>
     
     <!-- End Left Column -->
@@ -157,43 +420,64 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
           <div class="w3-card w3-round w3-white">
             <div class="w3-container w3-padding">
               <form>
-                <h6 class="w3-opacity">What would you like to post?</h6>
+                <h4 class="w3-opacity">What would you like to post?</h4>
                 <textarea [(ngModel)] = "current" name = "current" (keypress) = "updateCountdown()" class = "message" placeholder="Hello, child." rows = "5" cols = "70" maxlength = "200"></textarea>
                 <h6>Characters remaining: {{ charactersRemaining }}</h6>
                 <input type="file" id = "postPic" name="postPic" ngModel  #postPic="ngModel" accept = "image/*" (change)="fileChange($event)"/><br>
-                <button type="button" (click) = "postIt()" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Post</button> 
+                <button type="button" (click) = "postIt()" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Post</button> 
               </form>
             </div>
           </div>
         </div>
       </div>
+      <div class="w3-col m7">
+        <div *ngFor = "let post of posts">
+          
+            <div class="w3-row-padding">
+              <div class="w3-col m12">
+                <div class="w3-card w3-round w3-white">
+                  <div class="w3-container w3-padding">
+                    <div><h6>{{post.postDate}}</h6></div>
+                    {{post.post}}
+                    <div>likes: {{post.likeCount}}</div>
+                    <img [src]="'data:image/jpg;base64,' + post.pic" alt="" height = "100px" width = "100px">
+                    <mat-checkbox value = "radioStatus" (click) = "like(radioStatus, post.id,post.likeCount)" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like</mat-checkbox>  
+                    <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button> 
+                  </div>
+                </div>
+             </div>
+            </div>
+          
+        </div>
+      <!-- End Middle Column -->
+      </div>
       
       <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
         <img src="/w3images/avatar2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
         <span class="w3-right w3-opacity">1 min</span>
-        <h4>John Doe</h4><br>
+        <h4>Casey Spencer</h4><br>
         <hr class="w3-clear">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p>One does not simply anger the Scrum Master. Therefore the effort in doing so should be applauded, right Elliott? 🤣.</p>
           <div class="w3-row-padding" style="margin:0 -16px">
             <div class="w3-half">
-              <img src="/w3images/lights.jpg" style="width:100%" alt="Northern Lights" class="w3-margin-bottom">
+              <img src="/w3images/lights.jpg" style="width:100%" alt="D&D" class="w3-margin-bottom">
             </div>
             <div class="w3-half">
-              <img src="/w3images/nature.jpg" style="width:100%" alt="Nature" class="w3-margin-bottom">
+              <img src="/w3images/nature.jpg" style="width:100%" alt="Shadow of The Colossus" class="w3-margin-bottom">
           </div>
         </div>
-        <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like</button> 
-        <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button> 
+        <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like</button> 
+        <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button> 
       </div>
       
       <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
         <img src="/w3images/avatar5.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
         <span class="w3-right w3-opacity">16 min</span>
-        <h4>Jane Doe</h4><br>
+        <h4>Elliott Bailey-Wills</h4><br>
         <hr class="w3-clear">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like</button> 
-        <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button> 
+        <p>What is wrong with everyone on this project!?! I am the Scrum Masta! 🤬.</p>
+        <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like</button> 
+        <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button> 
       </div>  
 
       <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
@@ -201,11 +485,11 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
         <span class="w3-right w3-opacity">32 min</span>
         <h4>Mark Hardebeck</h4><br>
         <hr class="w3-clear">
-        <p>Have you seen this?</p>
+        <p>Holy Cow! Have you seen this?!</p>
         <img src="/w3images/nature.jpg" style="width:100%" class="w3-margin-bottom">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like</button> 
-        <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button> 
+        <p>Runscape definitely has to be the best game to date! Unfriend me if you disagree 🙃</p>
+        <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like</button> 
+        <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button> 
       </div> 
       
     <!-- End Middle Column -->
@@ -228,7 +512,7 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
         <div class="w3-container">
           <p>Friend Request</p>
           <img src="/w3images/avatar6.png" alt="Avatar" style="width:50%"><br>
-          <span>Jane Doe</span>
+          <span>Jason Clary</span>
           <div class="w3-row w3-opacity">
             <div class="w3-half">
               <button class="w3-button w3-block w3-green w3-section" title="Accept"><i class="fa fa-check"></i></button>
@@ -242,7 +526,7 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
       <br>
       
       <div class="w3-card w3-round w3-white w3-padding-16 w3-center">
-        <p>ADS</p>
+        <p>ADS for All</p>
       </div>
       <br>
       
@@ -260,8 +544,6 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
 </div>
 
 
-
- 
 <script>
 // Accordion
 function myFunction(id) {
@@ -292,4 +574,3 @@ function openNav() {
 </div>
 <br>
 </html> 
-

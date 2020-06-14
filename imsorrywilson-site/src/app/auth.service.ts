@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Login } from './Login';
 
@@ -9,10 +9,8 @@ import { Login } from './Login';
 export class AuthService {
 
   constructor(private http: HttpClient) { }
-
+  httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' })};
   getUserDetails(login:Login): Observable<any>{
-    console.log(JSON.stringify(login));
-
-    return this.http.post<any>('http://localhost:8080/user/login',login); //change the url
+    return this.http.post<any>('http://localhost:8080/user/login',JSON.stringify(login),this.httpOptions); //change the url
   }
 }
