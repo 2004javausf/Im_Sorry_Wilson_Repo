@@ -19,12 +19,11 @@ public interface UserDao extends JpaRepository<User,Integer> {
 	
 	@Transactional
 	@Modifying
-	@Query("UPDATE User u SET u.password = :newPassword WHERE u.id = :id")
-	int updatePassword(@Param("newPassword")String newPassword, @Param("id")int userID);
+	@Query("UPDATE User u SET u.password = :password WHERE u.id = :id")
+	int updatePassword(@Param("password")String password, @Param("id")int id);
 	
 	@Transactional
 	@Modifying
-	@Query("UPDATE User u SET u.firstName = :firstName, u.lastName = :lastName, u.email = :email WHERE u.username = :username")
-	int updateInformation(@Param("firstName")String firstName, @Param("lastName")String lastName, @Param("email")String email, @Param("username")String username);
-
+	@Query("UPDATE User u SET u.firstName = :firstName, u.lastName = :lastName, u.email = :email, u.pic = :pic WHERE u.username = :username")
+	int updateInformation(@Param("firstName")String firstName, @Param("lastName")String lastName, @Param("email")String email, @Param("pic")byte[] pic, @Param("username")String username);
 }

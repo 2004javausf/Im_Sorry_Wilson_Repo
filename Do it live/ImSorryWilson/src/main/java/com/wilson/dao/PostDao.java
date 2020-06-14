@@ -25,4 +25,5 @@ public interface PostDao extends JpaRepository<Post,Integer> {
 	@Modifying
 	@Query("UPDATE Post p SET p.likeCount = p.likeCount - 1 WHERE p.ID = :id")
 	int subtractLikeCount( @Param("id")int postID);
+
 }
