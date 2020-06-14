@@ -22,6 +22,7 @@ export class PostsService {
   constructor(private httpclient:HttpClient) { }
 
   httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' })};
+  
   getPostData():Observable<Posts[]>{
     return this.httpclient.get<Posts[]>('http://ec2-3-22-185-47.us-east-2.compute.amazonaws.com:8080/home/feed',this.httpOptions);
   }

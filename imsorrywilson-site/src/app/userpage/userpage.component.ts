@@ -78,6 +78,7 @@ export class UserpageComponent implements OnInit {
 
   charactersRemaining = '200';
   current = '';
+  
   updateCountdown(){
     this.charactersRemaining = (199 - this.current.length).toString();
   }
@@ -85,6 +86,7 @@ export class UserpageComponent implements OnInit {
   homie(){
     this.home = 0;
   }
+
   settings(){
     this.home = 1;
   }
@@ -93,9 +95,6 @@ export class UserpageComponent implements OnInit {
   search(f){
     this.home = 2;
     this.userservice.searchForUser(f.value).subscribe(res => this.searchedUser = res);
-  }
-  profile(){
-    this.home = 3;
   }
 
   changeFile(file) {
@@ -154,6 +153,7 @@ export class UserpageComponent implements OnInit {
       })
     }
   }
+  
   updateInfo(){
     this.data.firstName = this.user.firstName;
     this.data.lastName = this.user.lastName;
@@ -186,6 +186,11 @@ export class UserpageComponent implements OnInit {
     this.isHidden = true;
     this.home = 0;
   }
+
+  profile(){
+    this.home = 3;
+  }
+
   radioStatus:boolean = true;
   like(event,id,like){
     this.radioStatus = !event;

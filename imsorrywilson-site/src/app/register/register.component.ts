@@ -4,6 +4,7 @@ import { Users } from '../Users';
 import { Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { JsonPipe } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -12,7 +13,7 @@ import { JsonPipe } from '@angular/common';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private router: Router, private register: RegisterService, private sanitizer: DomSanitizer) { }
+  constructor(private router: Router, private register: RegisterService, private httpClient: HttpClient, private sanitizer: DomSanitizer) { }
 
   user:Users = {
     id: 0,

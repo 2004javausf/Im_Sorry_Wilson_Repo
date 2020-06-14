@@ -12,3 +12,7 @@ textarea{
     vertical-align: middle;
     float:right;
 }
+
+mat-checkbox{
+    color: aliceblue;
+}
