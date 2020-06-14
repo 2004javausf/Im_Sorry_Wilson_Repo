@@ -99,11 +99,7 @@ export class UserpageComponent implements OnInit {
       })
     }
   }
-<<<<<<< HEAD
-
-=======
   image;
->>>>>>> fd1e78051fe926b453227d3a3b0fbc978e451c51
   postIt(){
     this.post.userID = this.user.id;
     this.post.post = this.current;
@@ -118,8 +114,6 @@ export class UserpageComponent implements OnInit {
     username:this.user.username
   }
     
-<<<<<<< HEAD
-=======
   fileChange1(event){
     this.postPic = event.target.files[0];
     if(event.target.value){
@@ -131,7 +125,7 @@ export class UserpageComponent implements OnInit {
       })
     }
   }
->>>>>>> fd1e78051fe926b453227d3a3b0fbc978e451c51
+  
   updateInfo(){
     this.data.firstName = this.user.firstName;
     this.data.lastName = this.user.lastName;
