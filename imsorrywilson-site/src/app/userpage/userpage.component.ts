@@ -8,6 +8,8 @@ import { DataSend } from '../data';
 import { ReadVarExpr } from '@angular/compiler';
 import { rejects } from 'assert';
 import { splitAtColon } from '@angular/compiler/src/util';
+import { Comments } from '../Comment';
+import { CommentService } from '../comment.service';
 
 
 @Component({
@@ -17,7 +19,13 @@ import { splitAtColon } from '@angular/compiler/src/util';
 })
 export class UserpageComponent implements OnInit {
 
-  constructor(private router: Router, private userservice: UsersService, private postservice:PostsService) { }
+  constructor(private router: Router, private userservice: UsersService, private postservice:PostsService, private commentservice:CommentService) { }
+
+  ngOnInit(): void {
+    this.user = this.userservice.getIndividualUser();
+    this.postservice.getPostData().subscribe(res => this.posts = res);
+    this.commentservice.getCommentData().subscribe(res => this.comments = res);
+  }
 
   user:Users = {
     id: 7,
@@ -43,6 +51,14 @@ export class UserpageComponent implements OnInit {
 
   posts:Posts[];
   
+  comments:Comments[];
+  comment:Comments = {
+    id:0,
+    postID:0,
+    userName:"",
+    comment:"",
+    commentDate:""
+}
 
   get sortData(){
     return this.posts.sort((a,b) =>{
@@ -58,10 +74,7 @@ export class UserpageComponent implements OnInit {
     postDate:""
   }
   
-  ngOnInit(): void {
-    this.user = this.userservice.getIndividualUser();
-    this.postservice.getPostData().subscribe(res => this.posts = res);
-  }
+ 
 
   charactersRemaining = '200';
   current = '';
@@ -186,9 +199,14 @@ export class UserpageComponent implements OnInit {
     }
   }
 
-  isHidden1 = true;
-  comment(){
-    this.isHidden1 = false;
+  updateCommentText(){
+    console.log("now what")
+  }
+  commentOn(postID,username){
+    this.comment.postID = postID;
+    this.comment.userName = username;
+    console.log(this.comment);
+    this.commentservice.addComment(this.comment).subscribe();
   }
   logout(){
     this.router.navigate(['login']);

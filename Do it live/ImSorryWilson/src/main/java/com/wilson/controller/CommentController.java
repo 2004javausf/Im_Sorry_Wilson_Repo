@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -29,7 +30,8 @@ public class CommentController {
 		this.commentService = commentService;
 	}
 	
-	@GetMapping(value= "/newcomment")
+	//@GetMapping(value= "/newcomment")
+	@RequestMapping(value = "/newcomment", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody()
 	public Comment addNewComment(@RequestBody Comment comment) {
@@ -37,11 +39,19 @@ public class CommentController {
 		return this.commentService.addComment(comment);
 	}
 	
-	@GetMapping(value = "/getcomments")
+	//@GetMapping(value = "/getcomments")
+	@RequestMapping(value = "/getcommentsbyid", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody()
-	public List<Comment> getAllCommentsByPostID(@RequestParam int postID){
+	public List<Comment> getAllCommentsById(@RequestParam int postID){
 		return commentService.getCommentByPostID(postID);
+	}
+	
+	@RequestMapping(value = "/getcomments", method = RequestMethod.GET)
+	@ResponseStatus(HttpStatus.OK)
+	@ResponseBody()
+	public List<Comment> getAllComments(){
+		return commentService.getAllComments();
 	}
 
 }
