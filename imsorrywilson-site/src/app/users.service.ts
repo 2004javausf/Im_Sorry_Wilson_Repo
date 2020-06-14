@@ -32,15 +32,15 @@ export class UsersService {
 
   searchForUser(username):Observable<Users>{
     console.log(username);
-    return this.httpclient.post<any>('http://localhost:8080/user/findbyusername',username);
+    return this.httpclient.post<any>('http://ec2-3-22-185-47.us-east-2.compute.amazonaws.com:8080/user/findbyusername',username);
   }
 
   updateInfo(data:DataSend):Observable<DataSend>{
     console.log(data);
-    return this.httpclient.post<any>('http://localhost:8080/user/updateinfo',data,this.httpOptions);
+    return this.httpclient.post<any>('http://ec2-3-22-185-47.us-east-2.compute.amazonaws.com:8080/user/updateinfo',data,this.httpOptions);
   }
 
   updatePassword(user:Users):Observable<Users>{
-    return this.httpclient.post<any>('http://localhost:8080/user/updatepassword',user,this.httpOptions);
+    return this.httpclient.post<any>('http://ec2-3-22-185-47.us-east-2.compute.amazonaws.com:8080/user/updatepassword',user,this.httpOptions);
   }
 }

@@ -24,19 +24,19 @@ export class PostsService {
   httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' })};
   
   getPostData():Observable<Posts[]>{
-    return this.httpclient.get<Posts[]>('http://localhost:8080/home/feed',this.httpOptions);
+    return this.httpclient.get<Posts[]>('http://ec2-3-22-185-47.us-east-2.compute.amazonaws.com:8080/home/feed',this.httpOptions);
   }
 
   newPost(posts:Posts):Observable<Posts>{
     console.log(posts);
-    return this.httpclient.post<any>('http://localhost:8080/home/newpost',posts);
+    return this.httpclient.post<any>('http://ec2-3-22-185-47.us-east-2.compute.amazonaws.com:8080/home/newpost',posts);
   }
   likePost(id:number):Observable<number>{
     console.log(id);
-    return this.httpclient.post<any>('http://localhost:8080/home/addlike',id)
+    return this.httpclient.post<any>('http://ec2-3-22-185-47.us-east-2.compute.amazonaws.com:8080/home/addlike',id)
   }
 
   unLikePost(id:number):Observable<number>{
-    return this.httpclient.post<any>('http://localhost:8080/home/sublike',id)
+    return this.httpclient.post<any>('http://ec2-3-22-185-47.us-east-2.compute.amazonaws.com:8080/home/sublike',id)
   }
 }

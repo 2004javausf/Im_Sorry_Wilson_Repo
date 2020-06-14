@@ -8,6 +8,8 @@ import { DataSend } from '../data';
 import { ReadVarExpr } from '@angular/compiler';
 import { rejects } from 'assert';
 import { splitAtColon } from '@angular/compiler/src/util';
+import { Comments } from '../Comment';
+import { CommentService } from '../comment.service';
 
 
 @Component({
@@ -17,7 +19,13 @@ import { splitAtColon } from '@angular/compiler/src/util';
 })
 export class UserpageComponent implements OnInit {
 
-  constructor(private router: Router, private userservice: UsersService, private postservice:PostsService) { }
+  constructor(private router: Router, private userservice: UsersService, private postservice:PostsService, private commentservice:CommentService) { }
+
+  ngOnInit(): void {
+    this.user = this.userservice.getIndividualUser();
+    this.postservice.getPostData().subscribe(res => this.posts = res);
+    this.commentservice.getCommentData().subscribe(res => this.comments = res);
+  }
 
   user:Users = {
     id: 7,
@@ -42,7 +50,21 @@ export class UserpageComponent implements OnInit {
   home:number = 0; //0 for user page, 1 for settings page, 2 for search //3 for user profile page
 
   posts:Posts[];
+  
+  comments:Comments[];
+  comment:Comments = {
+    id:0,
+    postID:0,
+    userName:"",
+    comment:"",
+    commentDate:""
+}
 
+  get sortData(){
+    return this.posts.sort((a,b) =>{
+      return <any>new Date(b.postDate) - <any>new Date(a.postDate);
+    });
+  }
   post:Posts={
     id:0,
     userID: this.user.id,
@@ -52,10 +74,7 @@ export class UserpageComponent implements OnInit {
     postDate:""
   }
   
-  ngOnInit(): void {
-    this.user = this.userservice.getIndividualUser();
-    this.postservice.getPostData().subscribe(res => this.posts = res);
-  }
+ 
 
   charactersRemaining = '200';
   current = '';
@@ -104,6 +123,15 @@ export class UserpageComponent implements OnInit {
     this.post.userID = this.user.id;
     this.post.post = this.current;
     this.postservice.newPost(this.post).subscribe();
+    window.alert("Your post has been made!");
+    this.post.id=0;
+    this.post.userID= this.user.id;
+    this.post.post="";
+    this.post.pic= null;
+    this.post.likeCount= 0;
+    this.post.postDate="";
+    this.current = "";
+    this.postPic = null;
   }
 
   data:DataSend={
@@ -132,8 +160,9 @@ export class UserpageComponent implements OnInit {
     this.data.email = this.user.email;
     this.data.pic = this.user.pic;
     this.data.username = this.user.username;
-    
     this.userservice.updateInfo(this.data).subscribe();
+    window.alert("Your changes have been saved");
+    this.home = 0;
   }
 
   vPassword = "";
@@ -152,6 +181,10 @@ export class UserpageComponent implements OnInit {
     this.user.password = this.newPassword;
     console.log(this.user.password);
     this.userservice.updatePassword(this.user).subscribe();
+    window.alert("Your password has been updated");
+    this.vPassword = "";
+    this.isHidden = true;
+    this.home = 0;
   }
 
   profile(){
@@ -171,7 +204,19 @@ export class UserpageComponent implements OnInit {
     }
   }
 
+  updateCommentText(){
+    console.log("now what")
+  }
+  commentOn(postID,username,comment){
+    this.comment.postID = postID;
+    this.comment.userName = username;
+    this.comment.comment = comment;
+    this.commentservice.addComment(this.comment).subscribe();
+  }
   logout(){
     this.router.navigate(['login']);
   }
 }
+
+
+
