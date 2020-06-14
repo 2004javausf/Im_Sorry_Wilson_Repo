@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { RegisterService } from '../register.service';
 import { Users } from '../Users';
 import { Router } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-register',
@@ -10,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private router: Router, private register: RegisterService) { }
+  constructor(private router: Router, private register: RegisterService, private sanitizer: DomSanitizer) { }
 
   user:Users = {
     id: 0,
@@ -24,6 +26,27 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  changeFile(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  }
+  imagePreview:any;
+  postPic:any;
+  fileChange(event){
+    this.postPic = event.target.files[0];
+    if(event.target.value){
+      const file = event.target.files[0];
+      this.changeFile(file).then((base64:string):any=>{
+        this.postPic = base64;
+        this.user.pic = this.postPic.split(',')[1];
+      })
+    }
+  }
+  image;
   onSubmit(r){
     console.log(r.value);
     this.user.username = r.value.username;
@@ -31,8 +54,7 @@ export class RegisterComponent implements OnInit {
     this.user.firstName = r.value.firstName;
     this.user.lastName = r.value.lastName;
     this.user.email = r.value.email;
-    // this.user.pic = r.value.pic;
-    console.log(this.user);
+   
     this.register.registerUser(this.user).subscribe();
     window.alert("Account Registered!");
     this.router.navigate(['login']);

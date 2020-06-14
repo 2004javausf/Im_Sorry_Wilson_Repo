@@ -37,8 +37,8 @@ public class UserService {
 		return this.userDao.updatePassword(newPassword, userID);
 	}
 	
-	public int updateInformation(String firstName, String lastName, String email, String username) {
-		return this.userDao.updateInformation(firstName, lastName, email, username);
+	public int updateInformation(String firstName, String lastName, String email, byte[] pic, String username) {
+		return this.userDao.updateInformation(firstName, lastName, email, pic, username);
 	}
 
 }

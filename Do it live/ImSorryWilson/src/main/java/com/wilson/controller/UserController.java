@@ -32,18 +32,45 @@ public class UserController {
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody()
+<<<<<<< HEAD
 	public User getUserAuthenticate(@RequestParam String username, @RequestParam String password){
 		LogThis.LogIt("info", "User:" +username+ " logged in!");
 		return userService.login(username, password);
+=======
+	public User getUser(@RequestBody User user){
+		List<User> temp = new ArrayList<User>();
+		User ret = new User();
+		temp = this.userService.getAllUsers();
+		for(int i=0; i<temp.size(); i++) {
+			if(temp.get(i).getUsername().equals(user.getUsername())) { //if username matches
+				if(temp.get(i).getPassword().equals(user.getPassword())) {
+					ret = temp.get(i);
+				}
+				i=temp.size();
+			}
+		}
+		
+		return ret;
+>>>>>>> 744cd2b4198f1aaa810347e50f320382166b9e4e
 	}
 	
-	@RequestMapping(value = "/findbyusername", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody()
-    public User getUserByUsername(@RequestParam String username){
-        System.out.println(username);
-        System.out.println(userService.getUserByUsername(username));
-        return userService.getUserByUsername(username);
-    }
+
+	@RequestMapping(value = "/findbyusername", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody()
+	public User getUserByUsername(@RequestBody User user){
+		List<User> temp = new ArrayList<User>();
+		User ret = new User();
+		temp = this.userService.getAllUsers();
+		for(int i=0; i<temp.size(); i++) {
+			if(temp.get(i).getUsername().equals(user.getUsername())) { //if username matches
+				ret = temp.get(i);
+				i=temp.size(); //we're done here
+			}
+		}
+		
+		return ret; //Returns json with null values if does not exist, filled json if it does.
+	}
+
 	
 	@RequestMapping(value = "/findbyid", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody()
@@ -70,13 +97,14 @@ public class UserController {
 	
 	@RequestMapping(value= "/updatepassword", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody()
-	public int updatePassword(@RequestParam String newPassword, @RequestParam int userID) {
-		return this.userService.updatePassword(newPassword, userID);
+	public int updatePassword(@RequestBody User user) {
+		return this.userService.updatePassword(user.getPassword(), user.getId());
 	}
 	
 	@RequestMapping(value= "/updateinfo", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody()
-	public int updateInformation(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, @RequestParam String username) {
-		return this.userService.updateInformation(firstName, lastName, email, username);
+	
+	public int updateInformation(@RequestBody User u) {
+		return this.userService.updateInformation(u.getFirstName(), u.getLastName(), u.getEmail(),u.getPic(), u.getUsername());
 	}
 }

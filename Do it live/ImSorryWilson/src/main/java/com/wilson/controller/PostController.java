@@ -32,7 +32,7 @@ public class PostController {
 		@RequestMapping(value = "/feed", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 		@ResponseBody()
 		public List<Post> getAllPosts(){
-			return(this.postService.getAllPosts()); //Returns json with null values if does not exist, filled json if it does.
+			return(this.postService.getAllPosts()); 
 		}
 		
 		@RequestMapping(value = "/profile", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -50,14 +50,18 @@ public class PostController {
 		
 		@RequestMapping(value= "/addlike", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 		@ResponseBody()
+<<<<<<< HEAD
 		public int addLikeCount(@RequestParam int postID) {
 			LogThis.LogIt("info", "Post Number:" +postID+ " was liked!");
+=======
+		public int addLikeCount(@RequestBody int postID) {
+>>>>>>> 744cd2b4198f1aaa810347e50f320382166b9e4e
 			return this.postService.addLikeCount(postID);
 		}
 		
 		@RequestMapping(value= "/sublike", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 		@ResponseBody()
-		public int subtractLikeCount(@RequestParam int postID) {
+		public int subtractLikeCount(@RequestBody int postID) {
 			return this.postService.subtractLikeCount(postID);
 		}
 }

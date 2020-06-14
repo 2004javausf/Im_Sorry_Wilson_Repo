@@ -1,3 +1,4 @@
+<body>
 <Form ngForm #r="ngForm" autocomplete="off" (ngSubmit)="onSubmit(r)">
     <h2>Register For Your Account</h2>
 <div class = .login>
@@ -19,8 +20,9 @@
         <input type="text" name="email" ngModel required #email="ngModel" placeholder="Email"/>
     </div>
         
-    <div>
-        <input type="text" name="pic" ngModel  #pic="ngModel" placeholder="Profile Picture"  /> <!--required--> 
+    <div><br>
+        <label for="pic" style="position:absolute;">Upload Profile Pic</label>
+        <input type="file" id = "pic" name="pic" ngModel  #pic="ngModel" accept = "image/*" (change)="fileChange($event)"/>
     </div>
     <div>
         <input type="submit" [disabled]="!r.valid" value="Register"/>  
@@ -28,3 +30,4 @@
     </div> 
 </div>
 </Form>
+</body>
