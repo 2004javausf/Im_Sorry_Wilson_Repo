@@ -1,6 +1,10 @@
+
+
 <body>
+<br>
+<br>
 <Form ngForm #r="ngForm" autocomplete="off" (ngSubmit)="onSubmit(r)">
-    <h2>Register a New Account</h2>
+    <h2 style="font-size: xx-large;">Register a New Account</h2>
 <div class = .login>
     <div>
     <input type="text" name="username" ngModel required #username="ngModel" placeholder="Username"/>
@@ -21,7 +25,7 @@
     </div>
         
     <div>
-        <input id="registration" type="submit" [disabled]="!r.valid" value="Register"/>  
+        <input style="font-size: x-large;" id="registration" type="submit" [disabled]="!r.valid" value="Register"/>  
     </div> 
 </div>
 </Form>

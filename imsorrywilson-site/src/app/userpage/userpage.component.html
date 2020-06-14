@@ -94,27 +94,6 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
             </div>
             <button onclick="myFunction('Demo3')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-users fa-fw w3-margin-right"></i> {{searchedUser.username}}'s Photos</button>
             <div id="Demo3" class="w3-hide w3-container">
-           <div class="w3-row-padding">
-           <br>
-             <div class="w3-half">
-               <img src="/w3images/lights.jpg" style="width:100%" class="w3-margin-bottom">
-             </div>
-             <div class="w3-half">
-               <img src="/w3images/nature.jpg" style="width:100%" class="w3-margin-bottom">
-             </div>
-             <div class="w3-half">
-               <img src="/w3images/mountains.jpg" style="width:100%" class="w3-margin-bottom">
-             </div>
-             <div class="w3-half">
-               <img src="/w3images/forest.jpg" style="width:100%" class="w3-margin-bottom">
-             </div>
-             <div class="w3-half">
-               <img src="/w3images/nature.jpg" style="width:100%" class="w3-margin-bottom">
-             </div>
-             <div class="w3-half">
-               <img src="/w3images/snow.jpg" style="width:100%" class="w3-margin-bottom">
-             </div>
-           </div>
             </div>
           </div>      
         </div>
@@ -132,35 +111,27 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
               <div class="w3-col m12">
                 <div class="w3-card w3-round w3-white">
                   <div class="w3-container w3-padding">
-                    <div><h6>{{post.postDate}}</h6></div>
-<<<<<<< HEAD
-                    <div *ngIf = "post.pic != null">
-                      <div><img [src]="'data:image/jpg;base64,' + post.pic" alt="" height = "150px" width = "150px"></div>
-                      <br>
+                    <div><h5>{{post.postDate}}</h5></div>
+                    <div *ngIf="post.pic !=null">
+                    <img [src]="'data:image/jpg;base64,' + post.pic" alt="" height = "150px" width = "150px">
                     </div>
-                    <div><p>{{post.post}}</p></div>
-                    <div><h6>likes: {{post.likeCount}} </h6></div>
-                    
-                    <mat-checkbox value = "radioStatus" (click) = "like(radioStatus, post.id,post.likeCount)" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i> Like</mat-checkbox>  
-                    <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button> 
-=======
                     {{post.post}}
-                    <div>likes: {{post.likeCount}}</div>
-                    <img [src]="'data:image/jpg;base64,' + post.pic" alt="" height = "100px" width = "100px">
+                    <div><b>Likes</b>: {{post.likeCount}}</div>
+                    
                     <form>
                       <mat-checkbox value = "radioStatus" (click) = "like(radioStatus, post.id,post.likeCount)" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like</mat-checkbox> 
                       <button (click) = "commentOn(post.id,user.username,commented)" type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button> 
                       <textarea id = {{post.id}} #commented name = comment.comment class = "message" placeholder="Write a comment" rows = "5" cols = "70" maxlength = "100"></textarea>
                     </form> 
->>>>>>> f6c988496252b422ba41b45096b1be19398464c7
+                    <h4 style="text-align:left;"><b>Comments:</b></h4>
+                    <div *ngFor = "let comment of comments">
+                      <div style="text-align:left;" *ngIf = "comment.postID == post.id">
+                        <b>{{comment.userName}}</b>: {{comment.comment}}
+                      </div>
+                    </div>
                   </div>
                 </div>
              </div>
-            </div>
-            <div *ngFor = "let comment of comments">
-              <div *ngIf = "comment.postID == post.id">
-                {{comment.comment}}
-              </div>
             </div>
           </div>
         </div>
@@ -209,27 +180,6 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
             </div>
             <button onclick="myFunction('Demo3')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-users fa-fw w3-margin-right"></i> My Photos</button>
             <div id="Demo3" class="w3-hide w3-container">
-           <div class="w3-row-padding">
-           <br>
-             <div class="w3-half">
-               <img src="/w3images/lights.jpg" style="width:100%" class="w3-margin-bottom">
-             </div>
-             <div class="w3-half">
-               <img src="/w3images/nature.jpg" style="width:100%" class="w3-margin-bottom">
-             </div>
-             <div class="w3-half">
-               <img src="/w3images/mountains.jpg" style="width:100%" class="w3-margin-bottom">
-             </div>
-             <div class="w3-half">
-               <img src="/w3images/forest.jpg" style="width:100%" class="w3-margin-bottom">
-             </div>
-             <div class="w3-half">
-               <img src="/w3images/nature.jpg" style="width:100%" class="w3-margin-bottom">
-             </div>
-             <div class="w3-half">
-               <img src="/w3images/snow.jpg" style="width:100%" class="w3-margin-bottom">
-             </div>
-           </div>
             </div>
           </div>      
         </div>
@@ -263,34 +213,29 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
                 <div class="w3-col m12">
                   <div class="w3-card w3-round w3-white">
                     <div class="w3-container w3-padding">
-                      <div><h6>{{post.postDate}}</h6></div>
-<<<<<<< HEAD
-                      <div *ngIf = "post.pic != null">
-                        <div><img [src]="'data:image/jpg;base64,' + post.pic" alt="" height = "150px" width = "150px"></div>
+                      <div><h5>{{post.postDate}}</h5></div>
+                      <div *ngIf="post.pic != null">
+                      <img [src]="'data:image/jpg;base64,' + post.pic" alt="" height = "150px" width = "150px">
                       </div>
-                      <div>{{post.post}}</div>
-                      <div><h5>likes: {{post.likeCount}}</h5></div> 
-                      <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like</button> 
-                      <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button> 
-=======
                       {{post.post}}
-                      <div>likes: {{post.likeCount}}</div>
-                      <img [src]="'data:image/jpg;base64,' + post.pic" alt="" height = "100px" width = "100px">
+                      <div><b>Likes</b>: {{post.likeCount}}</div>
+                      
                       <form>
+                        
                         <mat-checkbox value = "radioStatus" (click) = "like(radioStatus, post.id,post.likeCount)" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like</mat-checkbox> 
                         <button (click) = "commentOn(post.id,user.username,commented)" type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button> 
                         <textarea id = {{post.id}} #commented class = "message" placeholder="Write a comment" rows = "5" cols = "70" maxlength = "100"></textarea>
                       </form> 
->>>>>>> f6c988496252b422ba41b45096b1be19398464c7
+                      <h4 style="text-align:left;"><b>Comments:</b></h4>
+                    <div *ngFor = "let comment of comments">
+                      <div style="text-align:left;" *ngIf = "comment.postID == post.id">
+                        <b>{{comment.userName}}</b>: {{comment.comment}}
+                      </div>
+                    </div>
                     </div>
                   </div>
                </div>
-              </div>
-              <div *ngFor = "let comment of comments">
-                <div *ngIf = "comment.postID == post.id">
-                  {{comment.comment}}
-                </div>
-              </div>
+              </div>  
             </div>
           </div>
         </div>
@@ -300,37 +245,6 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
       </div>
       
       
-      <!-- Right Column -->
-      <div class="w3-col m2">
-        
-        <div class="w3-card w3-round w3-white w3-center">
-          <div class="w3-container">
-            <p>Friend Request</p>
-            <img src="/w3images/avatar6.png" alt="KittenKillzU" style="width:50%"><br>
-            <span>Jason Knighten</span>
-            <div class="w3-row w3-opacity">
-              <div class="w3-half">
-                <button class="w3-button w3-block w3-green w3-section" title="Accept"><i class="fa fa-check"></i></button>
-              </div>
-              <div class="w3-half">
-                <button class="w3-button w3-block w3-red w3-section" title="Decline"><i class="fa fa-remove"></i></button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <br>
-        
-        <div class="w3-card w3-round w3-white w3-padding-16 w3-center">
-          <p>We are currently on your profile page</p>
-        </div>
-        <br>
-        
-        <div class="w3-card w3-round w3-white w3-padding-32 w3-center">
-          <p><i class="fa fa-bug w3-xxlarge"></i></p>
-        </div>
-        
-      <!-- End Right Column -->
-      </div>
       
     <!-- End Grid -->
     </div>
@@ -362,27 +276,6 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
           </div>
           <button onclick="myFunction('Demo3')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-users fa-fw w3-margin-right"></i> My Photos</button>
           <div id="Demo3" class="w3-hide w3-container">
-         <div class="w3-row-padding">
-         <br>
-           <div class="w3-half">
-             <img src="/w3images/lights.jpg" style="width:100%" class="w3-margin-bottom">
-           </div>
-           <div class="w3-half">
-             <img src="/w3images/nature.jpg" style="width:100%" class="w3-margin-bottom">
-           </div>
-           <div class="w3-half">
-             <img src="/w3images/mountains.jpg" style="width:100%" class="w3-margin-bottom">
-           </div>
-           <div class="w3-half">
-             <img src="/w3images/forest.jpg" style="width:100%" class="w3-margin-bottom">
-           </div>
-           <div class="w3-half">
-             <img src="/w3images/nature.jpg" style="width:100%" class="w3-margin-bottom">
-           </div>
-           <div class="w3-half">
-             <img src="/w3images/snow.jpg" style="width:100%" class="w3-margin-bottom">
-           </div>
-         </div>
           </div>
         </div>      
       </div>
@@ -397,11 +290,11 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
             <span class="w3-tag w3-small w3-theme-d4">Jason</span>
             <span class="w3-tag w3-small w3-theme-d3">Elliott</span>
             <span class="w3-tag w3-small w3-theme-d2">Games</span>
-            <span class="w3-tag w3-small w3-theme-d1">Friends</span>
+            <span class="w3-tag w3-small w3-theme-d1">Anas</span>
             <span class="w3-tag w3-small w3-theme">Games</span>
             <span class="w3-tag w3-small w3-theme-l1">Friends</span>
             <span class="w3-tag w3-small w3-theme-l2">Food</span>
-            <span class="w3-tag w3-small w3-theme-l3">Design</span>
+            <span class="w3-tag w3-small w3-theme-l3">Mark</span>
             <span class="w3-tag w3-small w3-theme-l4">Art</span>
             <span class="w3-tag w3-small w3-theme-l5">Casey</span>
           </p>
@@ -449,42 +342,30 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
               <div class="w3-col m12">
                 <div class="w3-card w3-round w3-white">
                   <div class="w3-container w3-padding">
-                    <div><h6>{{post.postDate}}</h6></div>
-<<<<<<< HEAD
+                    <div><h5>{{post.postDate}}</h5></div>
                     <div *ngIf = "post.pic != null">
-                      <div><img [src]="'data:image/jpg;base64,' + post.pic" alt="" height = "150px" width = "150px"></div>
-                      <br>
+                    <img [src]="'data:image/jpg;base64,' + post.pic" alt="" height = "150px" width = "150px">
                     </div>
-                    <div><p>{{post.post}}</p></div>
-                    <div><h6>likes: {{post.likeCount}} </h6></div>
-                    
-                    <mat-checkbox value = "radioStatus" (click) = "like(radioStatus, post.id,post.likeCount)" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i> Like</mat-checkbox>  
-                    <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button> 
-=======
                     {{post.post}}
-                    <div>likes: {{post.likeCount}}</div>
-                    <img [src]="'data:image/jpg;base64,' + post.pic" alt="" height = "100px" width = "100px">
+                    <div><b>Likes</b>: {{post.likeCount}}</div>       
                     <form>
                       <mat-checkbox value = "radioStatus" (click) = "like(radioStatus, post.id,post.likeCount)" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like</mat-checkbox> 
                       <button (click) = "commentOn(post.id,user.username, commented.value)" type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button> 
                       <textarea id = {{post.id}} #commented  class = "message" placeholder="Write a comment" rows = "5" cols = "70" maxlength = "100"></textarea>
                     </form> 
->>>>>>> f6c988496252b422ba41b45096b1be19398464c7
+                    <h4 style="text-align:left;"><b>Comments:</b></h4>
+                    <div *ngFor = "let comment of comments">
+                      <div style="text-align: left;" *ngIf = "comment.postID == post.id">
+                        <b>{{comment.userName}}</b>: {{comment.comment}}
+                      </div>
+                    </div>
                   </div>
                 </div>
              </div>
             </div>
-            <div *ngFor = "let comment of comments">
-              <div *ngIf = "comment.postID == post.id">
-                {{comment.comment}}
-              </div>
-            </div>
         </div>
-<<<<<<< HEAD
-=======
        
       <!-- End Middle Column -->
->>>>>>> f6c988496252b422ba41b45096b1be19398464c7
       </div>
       
     <!-- End Middle Column -->
