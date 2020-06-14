@@ -27,5 +27,9 @@ public class CommentService {
 	public List <Comment> getCommentByPostID(int postID) {
         return this.commentDao.findCommentByPostID(postID);
     } 
+	
+	public List<Comment> getAllComments(){
+		return this.commentDao.findAll();
+	}
 
 }

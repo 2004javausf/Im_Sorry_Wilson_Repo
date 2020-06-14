@@ -32,7 +32,7 @@ public class UserController {
 		this.userService = userService;
 	}
 	
-	@RequestMapping(value = "/login")
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody()
 	public User getUser(@RequestBody User user){
@@ -52,7 +52,7 @@ public class UserController {
 	}
 	
 
-	@RequestMapping(value = "/findbyusername")
+	@RequestMapping(value = "/findbyusername", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody()
 	public User getUserByUsername(@RequestBody User user){
@@ -70,24 +70,7 @@ public class UserController {
 	}
 
 	
-	@RequestMapping(value = "/findbyid")
-	@ResponseStatus(HttpStatus.OK)
-	@ResponseBody()
-	public User getUserById(@RequestBody User user){
-		List<User> temp = new ArrayList<User>();
-		User ret = new User();
-		temp = this.userService.getAllUsers();
-		for(int i=0; i<temp.size(); i++) {
-			if(temp.get(i).getId().equals(user.getId())) { //if username matches
-				ret = temp.get(i);
-				i=temp.size(); //we're done here
-			}
-		}
-		
-		return ret; //Returns json with null values if does not exist, filled json if it does.
-	}
-	
-	@RequestMapping(value= "/register")
+	@RequestMapping(value= "/register", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody()
 	public User addNewUser(@RequestBody User user) {
@@ -95,14 +78,14 @@ public class UserController {
 		return this.userService.addUser(user);
 	}
 	
-	@RequestMapping(value= "/updatepassword")
+	@RequestMapping(value= "/updatepassword", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody()
 	public int updatePassword(@RequestBody User user) {
 		return this.userService.updatePassword(user.getPassword(), user.getId());
 	}
 	
-	@RequestMapping(value= "/updateinfo")
+	@RequestMapping(value= "/updateinfo", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody()
 	public int updateInformation(@RequestBody User u) {
