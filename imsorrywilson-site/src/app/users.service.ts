@@ -30,6 +30,10 @@ export class UsersService {
     return this.user;
   }
 
+  getAllUsers():Observable<Users[]>{
+    return this.httpclient.get<Users[]>('http://ec2-3-22-185-47.us-east-2.compute.amazonaws.com:8080/user/getusers');
+  }
+
   searchForUser(username):Observable<Users>{
     console.log(username);
     return this.httpclient.post<any>('http://ec2-3-22-185-47.us-east-2.compute.amazonaws.com:8080/user/findbyusername',username);

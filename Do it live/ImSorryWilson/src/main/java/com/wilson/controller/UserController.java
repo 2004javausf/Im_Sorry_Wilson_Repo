@@ -51,7 +51,13 @@ public class UserController {
 		return ret;
 	}
 	
-
+	@RequestMapping(value = "/getusers", method = RequestMethod.GET)
+	@ResponseStatus(HttpStatus.OK)
+	@ResponseBody()
+	public List<User> getAllUsers() {
+		return userService.getAllUsers();
+	}
+		
 	@RequestMapping(value = "/findbyusername", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody()
