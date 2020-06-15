@@ -25,8 +25,16 @@ export class UserpageComponent implements OnInit {
     this.user = this.userservice.getIndividualUser();
     this.postservice.getPostData().subscribe(res => this.posts = res);
     this.commentservice.getCommentData().subscribe(res => this.comments = res);
+    this.userservice.getAllUsers().subscribe(res => this.users = res);
   }
 
+  onLoad(){
+    this.postservice.getPostData().subscribe(res => this.posts = res);
+    this.commentservice.getCommentData().subscribe(res => this.comments = res);
+    this.userservice.getAllUsers().subscribe(res => this.users = res);
+  }
+
+  users:Users[];
   user:Users = {
     id: 7,
     username: "",
@@ -95,6 +103,7 @@ export class UserpageComponent implements OnInit {
   search(f){
     this.home = 2;
     this.userservice.searchForUser(f.value).subscribe(res => this.searchedUser = res);
+    this.onLoad();
   }
 
   changeFile(file) {
@@ -132,6 +141,7 @@ export class UserpageComponent implements OnInit {
     this.post.postDate="";
     this.current = "";
     this.postPic = null;
+    this.onLoad();
   }
 
   data:DataSend={
@@ -163,6 +173,7 @@ export class UserpageComponent implements OnInit {
     this.userservice.updateInfo(this.data).subscribe();
     window.alert("Your changes have been saved");
     this.home = 0;
+    this.onLoad();
   }
 
   vPassword = "";
@@ -185,6 +196,7 @@ export class UserpageComponent implements OnInit {
     this.vPassword = "";
     this.isHidden = true;
     this.home = 0;
+    this.onLoad();
   }
 
   profile(){
@@ -202,6 +214,7 @@ export class UserpageComponent implements OnInit {
     }else if(event == false){
       this.postservice.unLikePost(id).subscribe();
     }
+    this.onLoad();
   }
 
   updateCommentText(){
@@ -212,6 +225,8 @@ export class UserpageComponent implements OnInit {
     this.comment.userName = username;
     this.comment.comment = comment;
     this.commentservice.addComment(this.comment).subscribe();
+    window.alert("Your comment has been posted!");
+    this.onLoad();
   }
   logout(){
     this.router.navigate(['login']);

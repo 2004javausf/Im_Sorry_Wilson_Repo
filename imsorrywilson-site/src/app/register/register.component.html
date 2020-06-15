@@ -22,8 +22,9 @@
     </div>
     <div>
         <input type="text" name="email" ngModel required #email="ngModel" placeholder="Email"/>
-    </div>
-        
+    </div><br>
+    <h4 style = "color:aliceblue; text-align: left;">Upload Profile Pic</h4>
+    <input type="file" id = "postPic" name="postPic" ngModel  #postPic="ngModel" accept = "image/*" (change)="fileChange($event)"/><br>
     <div>
         <input style="font-size: x-large;" id="registration" type="submit" [disabled]="!r.valid" value="Register"/>  
     </div> 
