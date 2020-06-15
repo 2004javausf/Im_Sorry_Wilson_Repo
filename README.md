@@ -4,7 +4,7 @@ even the greatest of mankind to socialize on the World Wide Web.
 
 ## Installation
 
-Enter the git bash command below to download and clone the TRMS files from the repository.
+Enter the git bash command below to download and clone the Im_Sorry_Wilson files from the repository.
 No installation is needed to run the program.
 
 ```bash
